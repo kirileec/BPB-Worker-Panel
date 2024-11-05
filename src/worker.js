@@ -32,7 +32,7 @@ export default {
             dohURL = env.DNS_RESOLVER_URL || dohURL;
             trojanPassword = env.TROJAN_PASS || trojanPassword;
             hashPassword = sha256.sha224(trojanPassword);
-            if (!isValidUUID(userID)) throw new Error(`Invalid UUID: ${userID}`);
+            if (!isValidUUID(userID)) throw new Error(`无效 UUID: ${userID}`);
             const upgradeHeader = request.headers.get('Upgrade');
             const url = new URL(request.url);
             
@@ -43,7 +43,7 @@ export default {
                 const client = searchParams.get('app');
                 const { kvNotFound, proxySettings: settings, warpConfigs } = await getDataset(env);
                 if (kvNotFound) {
-                    const errorPage = renderErrorPage('KV Dataset is not properly set!', null, true);
+                    const errorPage = renderErrorPage('KV 数据集未正确设置!', null, true);
                     return new Response(errorPage, { status: 200, headers: {'Content-Type': 'text/html'}});
                 } 
 
@@ -66,15 +66,15 @@ export default {
                                 if (warpPlusError) {
                                     return new Response(warpPlusError, { status: 400 });
                                 } else {
-                                    return new Response('Warp configs updated successfully', { status: 200 });
+                                    return new Response('Warp 配置更新成功', { status: 200 });
                                 }
                             } catch (error) {
                                 console.log(error);
-                                return new Response(`An error occurred while updating Warp configs! - ${error}`, { status: 500 });
+                                return new Response(`更新 Warp 配置时发生错误! - ${error}`, { status: 500 });
                             }
 
                         } else {
-                            return new Response('Unsupported request', { status: 405 });
+                            return new Response('不支持的请求', { status: 405 });
                         }
 
                     case `/sub/${userID}`:
@@ -177,7 +177,7 @@ export default {
                         const pwd = await env.bpb.get('pwd');
                         const isAuth = await Authenticate(request, env); 
                         if (request.method === 'POST') {     
-                            if (!isAuth) return new Response('Unauthorized or expired session!', { status: 401 });
+                            if (!isAuth) return new Response('会话未授权或已过期!', { status: 401 });
                             const formData = await request.formData();
                             const isReset = formData.get('resetSettings') === 'true';             
                             isReset 
@@ -205,7 +205,7 @@ export default {
                                                       
                     case '/login':
                         if (typeof env.bpb !== 'object') {
-                            const errorPage = renderErrorPage('KV Dataset is not properly set!', null, true);
+                            const errorPage = renderErrorPage('KV 数据集未正确设置!', null, true);
                             return new Response(errorPage, { status: 200, headers: {'Content-Type': 'text/html'}});
                         }
 
@@ -262,9 +262,9 @@ export default {
                     case '/panel/password':
                         const oldPwd = await env.bpb.get('pwd');
                         let passAuth = await Authenticate(request, env);
-                        if (oldPwd && !passAuth) return new Response('Unauthorized!', { status: 401 });           
+                        if (oldPwd && !passAuth) return new Response('未授权!', { status: 401 });           
                         const newPwd = await request.text();
-                        if (newPwd === oldPwd) return new Response('Please enter a new Password!', { status: 400 });
+                        if (newPwd === oldPwd) return new Response('请输入新密码!', { status: 400 });
                         await env.bpb.put('pwd', newPwd);
                         return new Response('Success', {
                             status: 200,
@@ -287,7 +287,7 @@ export default {
                     : await vlessOverWSHandler(request);
             }
         } catch (err) {
-            const errorPage = renderErrorPage('Something went wrong!', err, false);
+            const errorPage = renderErrorPage('发生了错误!', err, false);
             return new Response(errorPage, { status: 200, headers: {'Content-Type': 'text/html'}});
         }
     }
@@ -360,7 +360,7 @@ async function vlessOverWSHandler(request) {
                         isDns = true;
                     } else {
                         // controller.error('UDP proxy only enable for DNS which is port 53');
-                        throw new Error("UDP proxy only enable for DNS which is port 53"); // cf seems has bug, controller.error will not end stream
+                        throw new Error("UDP 代理仅对端口 53 的 DNS 启用"); // cf seems has bug, controller.error will not end stream
                         return;
                     }
                 }
@@ -515,7 +515,7 @@ async function parseTrojanHeader(buffer) {
     if (password !== hashPassword) {
         return {
             hasError: true,
-            message: "invalid password",
+            message: "密码无效",
         };
     }
 
@@ -523,7 +523,7 @@ async function parseTrojanHeader(buffer) {
     if (socks5DataBuffer.byteLength < 6) {
         return {
             hasError: true,
-            message: "invalid SOCKS5 request data",
+            message: "SOCKS5请求数据无效",
         };
     }
 
@@ -532,7 +532,7 @@ async function parseTrojanHeader(buffer) {
     if (cmd !== 1) {
         return {
             hasError: true,
-            message: "unsupported command, only TCP (CONNECT) is allowed",
+            message: "不支持的命令，仅允许 TCP (CONNECT)",
         };
     }
 
@@ -738,7 +738,7 @@ async function processVlessHeader(vlessBuffer, userID) {
     if (vlessBuffer.byteLength < 24) {
         return {
             hasError: true,
-            message: "invalid data",
+            message: "无效数据",
         };
     }
     const version = new Uint8Array(vlessBuffer.slice(0, 1));
@@ -757,7 +757,7 @@ async function processVlessHeader(vlessBuffer, userID) {
     if (!isValidUser) {
         return {
             hasError: true,
-            message: "invalid user",
+            message: "无效用户",
         };
     }
 
@@ -1165,13 +1165,13 @@ async function getDataset(env) {
         warpConfigs = await env.bpb.get('warpConfigs', {type: 'json'});
     } catch (error) {
         console.log(error);
-        throw new Error(`An error occurred while getting KV - ${error}`);
+        throw new Error(`获取 KV 时出错 - ${error}`);
     }
 
     if (!proxySettings) {
         proxySettings = await updateDataset(env);
         const { error, configs } = await fetchWgConfig(env, proxySettings);
-        if (error) throw new Error(`An error occurred while getting Warp configs - ${error}`);
+        if (error) throw new Error(`获取 Warp 配置时发生错误 - ${error}`);
         warpConfigs = configs;
     }
     
@@ -1186,7 +1186,7 @@ async function updateDataset (env, newSettings, resetSettings) {
             currentSettings = await env.bpb.get("proxySettings", {type: 'json'});
         } catch (error) {
             console.log(error);
-            throw new Error(`An error occurred while getting current KV settings - ${error}`);
+            throw new Error(`获取当前 KV 设置时发生错误 - ${error}`);
         }
     } else {
         await env.bpb.delete('warpConfigs');
@@ -1214,7 +1214,7 @@ async function updateDataset (env, newSettings, resetSettings) {
             };
         } catch (error) {
             console.log(error);
-            throw new Error(`An error occurred while resolving remote DNS server, please try agian! - ${error}`);
+            throw new Error(`解析远程 DNS 服务器时出错，请重试! - ${error}`);
         }
     } 
 
@@ -1313,7 +1313,7 @@ async function resolveDNS (domain) {
         return { ipv4, ipv6 };
     } catch (error) {
         console.error('Error resolving DNS:', error);
-        throw new Error(`An error occurred while resolving DNS - ${error}`);
+        throw new Error(`解析 DNS 时发生错误 - ${error}`);
     }
 }
 
@@ -1351,12 +1351,12 @@ async function Authenticate (request, env) {
         const token = cookie ? cookie[2] : null;
 
         if (!token) {
-            console.log('Unauthorized: Token not available!');
+            console.log('未经授权：令牌不可用!');
             return false;
         }
 
         const { payload } = await jwtVerify(token, secret);
-        console.log(`Successfully logined, User ID: ${payload.userID}`);
+        console.log(`成功登录，用户 ID: ${payload.userID}`);
         return true;
     } catch (error) {
         console.log(error);
@@ -1725,11 +1725,11 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                 <details open>
                     <summary><h2>VLESS / TROJAN ⚙️</h2></summary>
                     <div class="form-control">
-                        <label for="remoteDNS">🌏 Remote DNS</label>
+                        <label for="remoteDNS">🌏 远程DNS</label>
                         <input type="url" id="remoteDNS" name="remoteDNS" value="${remoteDNS}" required>
                     </div>
                     <div class="form-control">
-                        <label for="localDNS">🏚️ Local DNS</label>
+                        <label for="localDNS">🏚️ 本地DNS</label>
                         <input type="text" id="localDNS" name="localDNS" value="${localDNS}"
                             pattern="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|localhost$"
                             title="Please enter a valid DNS IP Address or localhost!"  required>
@@ -1744,28 +1744,28 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                         </div>
                     </div>
                     <div class="form-control">
-                        <label for="proxyIP">📍 Proxy IP</label>
+                        <label for="proxyIP">📍 代理IP</label>
                         <input type="text" id="proxyIP" name="proxyIP" value="${proxyIP}">
                     </div>
                     <div class="form-control">
-                        <label for="outProxy">✈️ Chain Proxy</label>
+                        <label for="outProxy">✈️ 链式代理</label>
                         <input type="text" id="outProxy" name="outProxy" value="${outProxy}">
                     </div>
                     <div class="form-control">
-                        <label for="cleanIPs">✨ Clean IPs</label>
+                        <label for="cleanIPs">✨ 优选IP</label>
                         <input type="text" id="cleanIPs" name="cleanIPs" value="${cleanIPs.replaceAll(",", " , ")}">
                     </div>
                     <div class="form-control">
-                        <label>🔎 IP Scanner</label>
+                        <label>🔎 IP 扫描</label>
                         <a href="https://scanner.github1.cloud/" id="scanner" name="scanner" target="_blank" style="width: 100%;">
                             <button type="button" class="button">
-                                Scan now
+                                开始扫描
                                 <span class="material-symbols-outlined">open_in_new</span>
                             </button>
                         </a>
                     </div>
                     <div class="form-control">
-                        <label for="enableIPv6">🔛 IPv6 Configs</label>
+                        <label for="enableIPv6">🔛 IPv6 配置</label>
                         <div class="input-with-select">
                             <select id="enableIPv6" name="enableIPv6">
                                 <option value="true" ${enableIPv6 ? 'selected' : ''}>Enabled</option>
@@ -1774,23 +1774,23 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                         </div>
                     </div>
                     <div class="form-control">
-                        <label for="customCdnAddrs">💀 Custom CDN Addrs</label>
+                        <label for="customCdnAddrs">💀 自定义 CDN 地址</label>
                         <input type="text" id="customCdnAddrs" name="customCdnAddrs" value="${customCdnAddrs.replaceAll(",", " , ")}">
                     </div>
                     <div class="form-control">
-                        <label for="customCdnHost">💀 Custom CDN Host</label> 
+                        <label for="customCdnHost">💀 自定义 CDN 主机</label> 
                         <input type="text" id="customCdnHost" name="customCdnHost" value="${customCdnHost}">
                     </div>
                     <div class="form-control">
-                        <label for="customCdnSni">💀 Custom CDN SNI</label>
+                        <label for="customCdnSni">💀 自定义 CDN SNI</label>
                         <input type="text" id="customCdnSni" name="customCdnSni" value="${customCdnSni}">
                     </div>
                     <div class="form-control">
-                        <label for="bestVLESSTrojanInterval">🔄 Best Interval</label>
+                        <label for="bestVLESSTrojanInterval">🔄 最佳延迟</label>
                         <input type="number" id="bestVLESSTrojanInterval" name="bestVLESSTrojanInterval" min="10" max="90" value="${bestVLESSTrojanInterval}">
                     </div>
                     <div class="form-control" style="padding-top: 10px;">
-                        <label>⚙️ Protocols</label>
+                        <label>⚙️ 协议</label>
                         <div style="width: 100%; display: grid; grid-template-columns: 1fr 1fr; align-items: baseline; margin-top: 10px;">
                             <div style = "display: flex; justify-content: center; align-items: center;">
                                 <input type="checkbox" id="vlessConfigs" name="vlessConfigs" onchange="handleProtocolChange(event)" value="true" ${vlessConfigs ? 'checked' : ''}>
@@ -1805,8 +1805,8 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                     <div class="table-container">
                         <table id="ports-block">
                             <tr>
-                                <th style="text-wrap: nowrap; background-color: gray;">Config type</th>
-                                <th style="text-wrap: nowrap; background-color: gray;">Ports</th>
+                                <th style="text-wrap: nowrap; background-color: gray;">配置类型</th>
+                                <th style="text-wrap: nowrap; background-color: gray;">端口</th>
                             </tr>
                             <tr>
                                 <td style="text-align: center; font-size: larger;"><b>TLS</b></td>
@@ -1815,7 +1815,7 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                                 </td>    
                             </tr>
                             ${!httpPortsBlock ? '' : `<tr>
-                                <td style="text-align: center; font-size: larger;"><b>Non TLS</b></td>
+                                <td style="text-align: center; font-size: larger;"><b>非 TLS</b></td>
                                 <td>
                                     <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;">${httpPortsBlock}</div>
                                 </td>    
@@ -1859,34 +1859,34 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                 <details>
                     <summary><h2>WARP GENERAL ⚙️</h2></summary>
                     <div class="form-control">
-                        <label for="warpEndpoints">✨ Endpoints</label>
+                        <label for="warpEndpoints">✨ 端点</label>
                         <input type="text" id="warpEndpoints" name="warpEndpoints" value="${warpEndpoints.replaceAll(",", " , ")}" required>
                     </div>
                     <div class="form-control">
-                        <label style="line-height: 1.5;">🔎 Scan Endpoint</label>
+                        <label style="line-height: 1.5;">🔎 扫描端点</label>
                         <button type="button" class="button" style="padding: 10px 0;" onclick="copyToClipboard('bash <(curl -fsSL https://raw.githubusercontent.com/Ptechgithub/warp/main/endip/install.sh)', false)">
-                            Copy Script<span class="material-symbols-outlined">terminal</span>
+                            复制脚本<span class="material-symbols-outlined">terminal</span>
                         </button>
                     </div>
                     <div class="form-control">
                         <label for="warpFakeDNS">🧢 Fake DNS</label>
                         <div class="input-with-select">
                             <select id="warpFakeDNS" name="warpFakeDNS">
-                                <option value="true" ${warpFakeDNS ? 'selected' : ''}>Enabled</option>
-                                <option value="false" ${!warpFakeDNS ? 'selected' : ''}>Disabled</option>
+                                <option value="true" ${warpFakeDNS ? 'selected' : ''}>启用</option>
+                                <option value="false" ${!warpFakeDNS ? 'selected' : ''}>禁用</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-control">
-                        <label for="warpPlusLicense">➕ Warp+ License</label>
+                        <label for="warpPlusLicense">➕ Warp+ 许可证</label>
                         <input type="text" id="warpPlusLicense" name="warpPlusLicense" value="${warpPlusLicense}" 
                             pattern="^[a-zA-Z0-9]{8}-[a-zA-Z0-9]{8}-[a-zA-Z0-9]{8}$" 
                             title="Please enter a valid Warp Plus license in xxxxxxxx-xxxxxxxx-xxxxxxxx format">
                     </div>
                     <div class="form-control">
-                        <label>♻️ Warp Configs</label>
+                        <label>♻️ Warp 配置</label>
                         <button id="refreshBtn" type="button" class="button" style="padding: 10px 0;" onclick="getWarpConfigs()">
-                            Update<span class="material-symbols-outlined">autorenew</span>
+                            更新<span class="material-symbols-outlined">autorenew</span>
                         </button>
                     </div>
                     <div class="form-control">
@@ -1897,14 +1897,14 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                 <details>
                     <summary><h2>WARP PRO ⚙️</h2></summary>
                     <div class="form-control">
-                        <label for="hiddifyNoiseMode">😵‍💫 Hiddify Mode</label>
+                        <label for="hiddifyNoiseMode">😵‍💫 Hiddify 模式</label>
                         <input type="text" id="hiddifyNoiseMode" name="hiddifyNoiseMode" 
                             pattern="^(m[1-6]|h_[0-9A-Fa-f]{2}|g_([0-9A-Fa-f]{2}_){2}[0-9A-Fa-f]{2})$" 
                             title="Enter 'm1-m6', 'h_HEX', 'g_HEX_HEX_HEX' which HEX can be between 00 to ff"
                             value="${hiddifyNoiseMode}" required>
                     </div>
                     <div class="form-control">
-                        <label for="nikaNGNoiseMode">😵‍💫 NikaNG Mode</label>
+                        <label for="nikaNGNoiseMode">😵‍💫 NikaNG 模式</label>
                         <input type="text" id="nikaNGNoiseMode" name="nikaNGNoiseMode" 
                             pattern="^(none|quic|random|[0-9A-Fa-f]+)$" 
                             title="Enter 'none', 'quic', 'random', or any HEX string like 'ee0000000108aaaa'"
@@ -1942,41 +1942,41 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                     </div>
                 </details>
                 <details>
-                    <summary><h2>ROUTING RULES ⚙️</h2></summary>
+                    <summary><h2>路由规则 ⚙️</h2></summary>
                     <div id="routing-rules" class="form-control" style="margin-bottom: 20px;">			
                         <div class="routing">
                             <input type="checkbox" id="bypass-lan" name="bypass-lan" value="true" ${bypassLAN ? 'checked' : ''}>
-                            <label for="bypass-lan">Bypass LAN</label>
+                            <label for="bypass-lan">绕过局域网</label>
                         </div>
                         <div class="routing">
                             <input type="checkbox" id="block-ads" name="block-ads" value="true" ${blockAds ? 'checked' : ''}>
-                            <label for="block-ads">Block Ads.</label>
+                            <label for="block-ads">屏蔽广告</label>
                         </div>
                         <div class="routing">
                             <input type="checkbox" id="bypass-iran" name="bypass-iran" value="true" ${bypassIran ? 'checked' : ''}>
-                            <label for="bypass-iran">Bypass Iran</label>
+                            <label for="bypass-iran">绕过伊朗</label>
                         </div>
                         <div class="routing">
                             <input type="checkbox" id="block-porn" name="block-porn" value="true" ${blockPorn ? 'checked' : ''}>
-                            <label for="block-porn">Block Porn</label>
+                            <label for="block-porn">屏蔽色情内容</label>
                         </div>
                         <div class="routing">
                             <input type="checkbox" id="bypass-china" name="bypass-china" value="true" ${bypassChina ? 'checked' : ''}>
-                            <label for="bypass-china">Bypass China</label>
+                            <label for="bypass-china">绕过中国</label>
                         </div>
                         <div class="routing">
                             <input type="checkbox" id="block-udp-443" name="block-udp-443" value="true" ${blockUDP443 ? 'checked' : ''}>
-                            <label for="block-udp-443">Block QUIC</label>
+                            <label for="block-udp-443">阻止 QUIC</label>
                         </div>
                         <div class="routing">
                             <input type="checkbox" id="bypass-russia" name="bypass-russia" value="true" ${bypassRussia ? 'checked' : ''}>
-                            <label for="bypass-russia">Bypass Russia</label>
+                            <label for="bypass-russia">绕过俄罗斯</label>
                         </div>
                     </div>
                 </details>
                 <div id="apply" class="form-control">
                     <div style="grid-column: 2; width: 100%; display: inline-flex;">
-                        <input type="submit" id="applyButton" style="margin-right: 10px;" class="button disabled" value="APPLY SETTINGS 💥" form="configForm">
+                        <input type="submit" id="applyButton" style="margin-right: 10px;" class="button disabled" value="应用设置 💥" form="configForm">
                         <button type="button" id="resetSettings" style="background: none; margin: 0; border: none; cursor: pointer;">
                             <i class="fa fa-refresh fa-2x fa-border" style="border-radius: .2em; border-color: var(--border-color);" aria-hidden="true"></i>
                         </button>
@@ -1984,12 +1984,12 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                 </div>
             </form>
             <hr>            
-            <h2>NORMAL SUB 🔗</h2>
+            <h2>一般订阅 🔗</h2>
             <div class="table-container">
                 <table id="normal-configs-table">
                     <tr>
-                        <th>Application</th>
-                        <th>Subscription</th>
+                        <th>应用</th>
+                        <th>订阅</th>
                     </tr>
                     <tr>
                         <td>
@@ -2031,11 +2031,11 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                             </div>
                         </td>
                         <td>
-                            <button onclick="openQR('https://${hostName}/sub/${userID}#BPB-Normal', 'Normal Subscription')" style="margin-bottom: 8px;">
-                                QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
+                            <button onclick="openQR('https://${hostName}/sub/${userID}#BPB-Normal', '一般订阅')" style="margin-bottom: 8px;">
+                                二维码&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
                             <button onclick="copyToClipboard('https://${hostName}/sub/${userID}#BPB-Normal', false)">
-                                Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
+                                复制订阅<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
                     </tr>
@@ -2056,7 +2056,7 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                         </td>
                         <td>
                             <button onclick="copyToClipboard('https://${hostName}/sub/${userID}?app=singbox#BPB-Normal', false)">
-                                Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
+                                复制订阅<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
                     </tr>
@@ -2066,8 +2066,8 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
             <div class="table-container">
                 <table id="full-normal-configs-table">
                     <tr>
-                        <th>Application</th>
-                        <th>Subscription</th>
+                        <th>应用</th>
+                        <th>订阅</th>
                     </tr>
                     <tr>
                         <td>
@@ -2098,10 +2098,10 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                         </td>
                         <td>
                             <button onclick="openQR('https://${hostName}/sub/${userID}?app=xray#BPB-Full-Normal', 'Full normal Subscription')" style="margin-bottom: 8px;">
-                                QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
+                                二维码&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
                             <button onclick="copyToClipboard('https://${hostName}/sub/${userID}?app=xray#BPB-Full-Normal', false)">
-                                Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
+                                复制订阅<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
                     </tr>
@@ -2114,10 +2114,10 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                         </td>
                         <td>
                             <button onclick="openQR('sing-box://import-remote-profile?url=https://${hostName}/sub/${userID}?app=sfa#BPB-Full-Normal', 'Normal Subscription')" style="margin-bottom: 8px;">
-                                QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
+                                二维码&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
                             <button onclick="copyToClipboard('https://${hostName}/sub/${userID}?app=sfa#BPB-Full-Normal', false)">
-                                Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
+                                复制订阅<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
                     </tr>
@@ -2146,21 +2146,21 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                         </td>
                         <td>
                             <button onclick="openQR('https://${hostName}/sub/${userID}?app=clash#BPB-Full-Normal', 'Normal Subscription')" style="margin-bottom: 8px;">
-                                QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
+                                二维码&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
                             <button onclick="copyToClipboard('https://${hostName}/sub/${userID}?app=clash#BPB-Full-Normal', false)">
-                                Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
+                                复制订阅<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
                     </tr>
                 </table>
             </div>
-            <h2>FRAGMENT SUB ⛓️</h2>
+            <h2>FRAGMENT订阅 ⛓️</h2>
             <div class="table-container">
                 <table id="frag-sub-table">
                     <tr>
-                        <th style="text-wrap: nowrap;">Application</th>
-                        <th style="text-wrap: nowrap;">Subscription</th>
+                        <th style="text-wrap: nowrap;">应用</th>
+                        <th style="text-wrap: nowrap;">订阅</th>
                     </tr>
                     <tr>
                         <td style="text-wrap: nowrap;">
@@ -2190,11 +2190,11 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                             </div>
                         </td>
                         <td>
-                            <button onclick="openQR('https://${hostName}/fragsub/${userID}#BPB-Fragment', 'Fragment Subscription')" style="margin-bottom: 8px;">
-                                QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
+                            <button onclick="openQR('https://${hostName}/fragsub/${userID}#BPB-Fragment', '片段订阅')" style="margin-bottom: 8px;">
+                                二维码&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
                             <button onclick="copyToClipboard('https://${hostName}/fragsub/${userID}#BPB-Fragment', true)">
-                                Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
+                                复制订阅<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
                     </tr>
@@ -2206,22 +2206,22 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                             </div>
                         </td>
                         <td>
-                            <button onclick="openQR('https://${hostName}/fragsub/${userID}?app=hiddify#BPB-Fragment', 'Fragment Subscription')" style="margin-bottom: 8px;">
-                                QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
+                            <button onclick="openQR('https://${hostName}/fragsub/${userID}?app=hiddify#BPB-Fragment', '片段订阅')" style="margin-bottom: 8px;">
+                                二维码&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
                             <button onclick="copyToClipboard('https://${hostName}/fragsub/${userID}?app=hiddify#BPB-Fragment', true)">
-                                Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
+                                复制订阅<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
                     </tr>
                 </table>
             </div>
-            <h2>WARP SUB 🔗</h2>
+            <h2>WARP 订阅 🔗</h2>
             <div class="table-container">
                 <table id="normal-configs-table">
                     <tr>
-                        <th>Application</th>
-                        <th>Subscription</th>
+                        <th>应用</th>
+                        <th>订阅</th>
                     </tr>
                     <tr>
                         <td>
@@ -2240,10 +2240,10 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                         </td>
                         <td>
                             <button onclick="openQR('https://${hostName}/warpsub/${userID}?app=xray#BPB-Warp', 'Warp Subscription')" style="margin-bottom: 8px;">
-                                QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
+                                二维码&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
                             <button onclick="copyToClipboard('https://${hostName}/warpsub/${userID}?app=xray#BPB-Warp', false)">
-                                Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
+                                复制订阅<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
                     </tr>
@@ -2260,10 +2260,10 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                         </td>
                         <td>
                             <button onclick="openQR('sing-box://import-remote-profile?url=https://${hostName}/warpsub/${userID}?app=singbox#BPB-Warp', 'Warp Subscription')" style="margin-bottom: 8px;">
-                                QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
+                                二维码&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
                             <button onclick="copyToClipboard('https://${hostName}/warpsub/${userID}?app=singbox#BPB-Warp', false)">
-                                Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
+                                复制订阅<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
                     </tr>
@@ -2292,16 +2292,16 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                         </td>
                         <td>
                             <button onclick="openQR('https://${hostName}/warpsub/${userID}?app=clash#BPB-Warp', 'Warp Subscription')" style="margin-bottom: 8px;">
-                                QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
+                                二维码&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
                             <button onclick="copyToClipboard('https://${hostName}/warpsub/${userID}?app=clash#BPB-Warp', false)">
-                                Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
+                                复制订阅<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
                     </tr>
                 </table>
             </div>
-            <h2>WARP PRO SUB 🔗</h2>
+            <h2>WARP PRO 订阅 🔗</h2>
             <div class="table-container">
                 <table id="warp-pro-configs-table">
                     <tr>
@@ -2324,11 +2324,11 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                             </div>
                         </td>
                         <td>
-                            <button onclick="openQR('https://${hostName}/warpsub/${userID}?app=nikang#BPB-Warp-Pro', 'Warp Pro Subscription')" style="margin-bottom: 8px;">
-                                QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
+                            <button onclick="openQR('https://${hostName}/warpsub/${userID}?app=nikang#BPB-Warp-Pro', 'WARP PRO 订阅')" style="margin-bottom: 8px;">
+                                二维码&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
                             <button onclick="copyToClipboard('https://${hostName}/warpsub/${userID}?app=nikang#BPB-Warp-Pro', false)">
-                                Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
+                                复制订阅<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
                     </tr>
@@ -2340,11 +2340,11 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                             </div>
                         </td>
                         <td>
-                            <button onclick="openQR('sing-box://import-remote-profile?url=https://${hostName}/warpsub/${userID}?app=hiddify#BPB-Warp-Pro', 'Warp Pro Subscription')" style="margin-bottom: 8px;">
-                                QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
+                            <button onclick="openQR('sing-box://import-remote-profile?url=https://${hostName}/warpsub/${userID}?app=hiddify#BPB-Warp-Pro', 'WARP PRO 订阅')" style="margin-bottom: 8px;">
+                                二维码&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
                             <button onclick="copyToClipboard('https://${hostName}/warpsub/${userID}?app=hiddify#BPB-Warp-Pro', false)">
-                                Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
+                                复制订阅<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
                     </tr>
@@ -2354,17 +2354,17 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                 <div class="modal-content">
                     <span class="close">&times;</span>
                     <form id="passwordChangeForm">
-                        <h2>Change Password</h2>
+                        <h2>修改密码</h2>
                         <div class="form-control">
-                            <label for="newPassword">New Password</label>
+                            <label for="newPassword">新密码</label>
                             <input type="password" id="newPassword" name="newPassword" required>
                             </div>
                         <div class="form-control">
-                            <label for="confirmPassword">Confirm Password</label>
+                            <label for="confirmPassword">确认密码</label>
                             <input type="password" id="confirmPassword" name="confirmPassword" required>
                         </div>
                         <div id="passwordError" style="color: red; margin-bottom: 10px;"></div>
-                        <button id="changePasswordBtn" type="submit" class="button">Change Password</button>
+                        <button id="changePasswordBtn" type="submit" class="button">修改密码</button>
                     </form>
                 </div>
             </div>
@@ -2381,7 +2381,7 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
             <div class="footer">
                 <i class="fa fa-github" style="font-size:36px; margin-right: 10px;"></i>
                 <a class="link" href="https://github.com/bia-pain-bache/BPB-Worker-Panel" style="color: var(--color); text-decoration: underline;" target="_blank">Github</a>
-                <button id="openModalBtn" class="button">Change Password</button>
+                <button id="openModalBtn" class="button">修改密码</button>
                 <button type="button" id="logout" style="background: none; color: var(--color); margin: 0; border: none; cursor: pointer;">
                     <i class="fa fa-power-off fa-2x" aria-hidden="true"></i>
                 </button>
@@ -2479,12 +2479,12 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                     document.body.style.cursor = 'default';
                     refreshBtn.innerHTML = refreshButtonVal;
                     if (response.ok) {
-                        alert('✅ Panel settings reset to default successfully! 😎');
+                        alert('✅ 面板设置已恢复默认! 😎');
                         window.location.reload(true);
                     } else {
                         const errorMessage = await response.text();
                         console.error(errorMessage, response.status);
-                        alert('⚠️ An error occured, Please try again!\\n⛔ ' + errorMessage);
+                        alert('⚠️ 发生错误, 请重试!\\n⛔ ' + errorMessage);
                     }         
                 } catch (error) {
                     console.error('Error:', error);
@@ -2524,7 +2524,7 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
             try {
                 document.body.style.cursor = 'wait';
                 const refreshButtonVal = refreshBtn.innerHTML;
-                refreshBtn.innerHTML = '⌛ Loading...';
+                refreshBtn.innerHTML = '⌛ 加载中...';
 
                 const response = await fetch('/update-warp', {
                     method: 'POST',
@@ -2534,11 +2534,11 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                 document.body.style.cursor = 'default';
                 refreshBtn.innerHTML = refreshButtonVal;
                 if (response.ok) {
-                    ${isWarpPlus} ? alert('✅ Warp configs upgraded to PLUS successfully! 😎') : alert('✅ Warp configs updated successfully! 😎');
+                    ${isWarpPlus} ? alert('✅ Warp 配置更新到 PLUS 成功! 😎') : alert('✅ Warp 配置更新成功! 😎');
                 } else {
                     const errorMessage = await response.text();
                     console.error(errorMessage, response.status);
-                    alert('⚠️ An error occured, Please try again!\\n⛔ ' + errorMessage);
+                    alert('⚠️ 发生错误, 请重试!\\n⛔ ' + errorMessage);
                 }         
             } catch (error) {
                 console.error('Error:', error);
@@ -2558,7 +2558,7 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
             if (activePortsNo === 0) {
                 event.preventDefault();
                 event.target.checked = !event.target.checked;
-                alert("⛔ At least one port should be selected! 🫤");
+                alert("⛔ 请至少选择一个端口! 🫤");
                 activePortsNo = 1;
                 defaultHttpsPorts.includes(event.target.name) && activeHttpsPortsNo++;
                 return false;
@@ -2567,7 +2567,7 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
             if (activeHttpsPortsNo === 0) {
                 event.preventDefault();
                 event.target.checked = !event.target.checked;
-                alert("⛔ At least one TLS(https) port should be selected! 🫤");
+                alert("⛔ 请至少选择一个 TLS(https) 端口! 🫤");
                 activeHttpsPortsNo = 1;
                 return false;
             }
@@ -2584,7 +2584,7 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
             if (activeProtocols === 0) {
                 event.preventDefault();
                 event.target.checked = !event.target.checked;
-                alert("⛔ At least one Protocol should be selected! 🫤");
+                alert("⛔ 请至少选择一个协议! 🫤");
                 activeProtocols = 1;
                 return false;
             }
@@ -2619,7 +2619,7 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
             textarea.select();
             document.execCommand('copy');
             document.body.removeChild(textarea);
-            alert('📋 Copied to clipboard:\\n\\n' +  value);
+            alert('📋 复制到剪切板:\\n\\n' +  value);
         }
 
         const applySettings = async (event, configForm) => {
@@ -2680,7 +2680,7 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
             });
 
             if (invalidIPs.length) {
-                alert('⛔ Invalid IPs or Domains 🫤\\n\\n' + invalidIPs.map(ip => '⚠️ ' + ip).join('\\n'));
+                alert('⛔ 无效IP或域名 🫤\\n\\n' + invalidIPs.map(ip => '⚠️ ' + ip).join('\\n'));
                 return false;
             }
             
@@ -2695,12 +2695,12 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
             }
 
             if (!(isVless && (hasSecurity && validSecurityType || !hasSecurity) && validTransmission) && !isSocksHttp && chainProxy) {
-                alert('⛔ Invalid Config! 🫤 \\n - The chain proxy should be VLESS, Socks or Http!\\n - VLESS transmission should be GRPC,WS or TCP\\n - VLESS security should be TLS,Reality or None\\n - socks or http should be like:\\n + (socks or http)://user:pass@host:port\\n + (socks or http)://host:port');               
+                alert('⛔ 无效配置! 🫤 \\n - The chain proxy should be VLESS, Socks or Http!\\n - VLESS transmission should be GRPC,WS or TCP\\n - VLESS security should be TLS,Reality or None\\n - socks or http should be like:\\n + (socks or http)://user:pass@host:port\\n + (socks or http)://host:port');               
                 return false;
             }
 
             if (isVless && securityType === 'tls' && vlessPort !== '443') {
-                alert('⛔ VLESS TLS port can be only 443 to be used as a proxy chain! 🫤');               
+                alert('⛔ VLESS TLS 端口只能为 443 (作为代理链)! 🫤');               
                 return false;
             }
 
@@ -2712,7 +2712,7 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
             try {
                 document.body.style.cursor = 'wait';
                 const applyButtonVal = applyButton.value;
-                applyButton.value = '⌛ Loading...';
+                applyButton.value = '⌛ 加载中...';
 
                 const response = await fetch('/panel', {
                     method: 'POST',
@@ -2724,12 +2724,12 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                 applyButton.value = applyButtonVal;
 
                 if (response.ok) {
-                    alert('✅ Parameters applied successfully 😎');
+                    alert('✅ 参数应用成功 😎');
                     window.location.reload(true);
                 } else {
                     const errorMessage = await response.text();
                     console.error(errorMessage, response.status);
-                    alert('⚠️ Session expired! Please login again.');
+                    alert('⚠️ 会话超时! 请重新登录.');
                     window.location.href = '/login';
                 }           
             } catch (error) {
@@ -2775,7 +2775,7 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
             const isLongEnough = newPassword.length >= 8;
 
             if (!(hasCapitalLetter && hasNumber && isLongEnough)) {
-                passwordError.textContent = '⚠️ Password must contain at least one capital letter, one number, and be at least 8 characters long.';
+                passwordError.textContent = '⚠️ 密码必须至少包含一个大写字母、一个数字，且长度至少为 8 个字符.';
                 return false;
             }
                     
@@ -2792,13 +2792,13 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                 if (response.ok) {
                     modal.style.display = "none";
                     document.body.style.overflow = "";
-                    alert("✅ Password changed successfully! 👍");
+                    alert("✅ 密码修改成功! 👍");
                     window.location.href = '/login';
                 } else if (response.status === 401) {
                     const errorMessage = await response.text();
                     passwordError.textContent = '⚠️ ' + errorMessage;
                     console.error(errorMessage, response.status);
-                    alert('⚠️ Session expired! Please login again.');
+                    alert('⚠️ 会话已过期！请重新登录.');
                     window.location.href = '/login';
                 } else {
                     const errorMessage = await response.text();
@@ -2824,7 +2824,7 @@ function renderLoginPage () {
     <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Login</title>
+    <title>用户登录</title>
     <style>
         :root {
             --color: black;
@@ -2951,12 +2951,12 @@ function renderLoginPage () {
                 if (response.ok) {
                     window.location.href = '/panel';
                 } else {
-                    passwordError.textContent = '⚠️ Wrong Password!';
+                    passwordError.textContent = '⚠️ 密码错误!';
                     const errorMessage = await response.text();
-                    console.error('Login failed:', errorMessage);
+                    console.error('登录失败:', errorMessage);
                 }
             } catch (error) {
-                console.error('Error during login:', error);
+                console.error('登录时出错:', error);
             }
         });
     </script>
@@ -2971,7 +2971,7 @@ function renderErrorPage (message, error, refer) {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Error Page</title>
+        <title>错误页面</title>
         <style>
             :root {
                 --color: black;
@@ -3006,7 +3006,7 @@ function renderErrorPage (message, error, refer) {
             <h1>BPB Panel <span style="font-size: smaller;">${panelVersion}</span> 💦</h1>
             <div id="error-message">
                 <h2>${message} ${refer 
-                    ? 'Please try again or refer to <a href="https://github.com/bia-pain-bache/BPB-Worker-Panel/blob/main/README.md">documents</a>' 
+                    ? '请重试或参考 <a href="https://github.com/bia-pain-bache/BPB-Worker-Panel/blob/main/README.md">documents</a>' 
                     : ''}
                 </h2>
                 <p><b>${error ? `⚠️ ${error.stack.toString()}` : ''}</b></p>
