@@ -5806,7 +5806,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                             value="${nikaNGNoiseMode}" required>
                     </div>
                     <div class="form-control">
-                        <label for="noiseCountMin">\u{1F39A}\uFE0F Noise Count</label>
+                        <label for="noiseCountMin">\u{1F39A}\uFE0F \u566A\u58F0\u6570</label>
                         <div class="min-max">
                             <input type="number" id="noiseCountMin" name="noiseCountMin"
                                 value="${noiseCountMin}" min="1" required>
@@ -5816,7 +5816,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                         </div>
                     </div>
                     <div class="form-control">
-                        <label for="noiseSizeMin">\u{1F4CF} Noise Size</label>
+                        <label for="noiseSizeMin">\u{1F4CF} \u566A\u58F0\u5927\u5C0F</label>
                         <div class="min-max">
                             <input type="number" id="noiseSizeMin" name="noiseSizeMin"
                                 value="${noiseSizeMin}" min="1" required>
@@ -5826,7 +5826,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                         </div>
                     </div>
                     <div class="form-control">
-                        <label for="noiseDelayMin">\u{1F55E} Noise Delay</label>
+                        <label for="noiseDelayMin">\u{1F55E} \u566A\u58F0\u5EF6\u8FDF</label>
                         <div class="min-max">
                             <input type="number" id="noiseDelayMin" name="noiseDelayMin"
                                 value="${noiseDelayMin}" min="1" required>
@@ -5957,7 +5957,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                     </tr>
                 </table>
             </div>
-            <h2>FULL NORMAL SUB \u{1F517}</h2>
+            <h2>\u4E00\u822C\u5168\u8BA2\u9605 \u{1F517}</h2>
             <div class="table-container">
                 <table id="full-normal-configs-table">
                     <tr>
@@ -6275,7 +6275,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
             <hr>
             <div class="footer">
                 <i class="fa fa-github" style="font-size:36px; margin-right: 10px;"></i>
-                <a class="link" href="https://github.com/bia-pain-bache/BPB-Worker-Panel" style="color: var(--color); text-decoration: underline;" target="_blank">Github</a>
+                <a class="link" href="https://github.com/kirileec/BPB-Worker-Panel" style="color: var(--color); text-decoration: underline;" target="_blank">Github</a>
                 <button id="openModalBtn" class="button">\u4FEE\u6539\u5BC6\u7801</button>
                 <button type="button" id="logout" style="background: none; color: var(--color); margin: 0; border: none; cursor: pointer;">
                     <i class="fa fa-power-off fa-2x" aria-hidden="true"></i>
@@ -6814,7 +6814,7 @@ function renderLoginPage() {
     </head>
     <body>
         <div class="container">
-            <h1>BPB Panel <span style="font-size: smaller;">${panelVersion}</span> \u{1F4A6}</h1>
+            <h1>BPB \u9762\u677F <span style="font-size: smaller;">${panelVersion}</span> \u{1F4A6}</h1>
             <div class="form-container">
                 <h2>User Login</h2>
                 <form id="loginForm">
@@ -7991,7 +7991,7 @@ async function getClashNormalConfig(env, proxySettings, hostName) {
     try {
       chainProxy = buildClashChainOutbound(proxyParams);
     } catch (error) {
-      console.log("An error occured while parsing chain proxy: ", error);
+      console.log("\u89E3\u6790\u94FE\u5F0F\u4EE3\u7406\u51FA\u9519: ", error);
       chainProxy = void 0;
       await env.bpb.put("proxySettings", JSON.stringify({
         ...proxySettings,
@@ -8592,7 +8592,7 @@ async function getSingBoxCustomConfig(env, proxySettings, hostName, client, isFr
     try {
       chainProxyOutbound = buildSingBoxChainOutbound(proxyParams);
     } catch (error) {
-      console.log("An error occured while parsing chain proxy: ", error);
+      console.log("\u89E3\u6790\u94FE\u5F0F\u4EE3\u7406\u51FA\u9519: ", error);
       chainProxyOutbound = void 0;
       await env.bpb.put("proxySettings", JSON.stringify({
         ...proxySettings,
