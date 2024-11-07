@@ -4,6 +4,7 @@ var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
   get: (a, b) => (typeof require !== "undefined" ? require : a)[b]
 }) : x)(function(x) {
@@ -42,16 +43,16 @@ var require_nacl_fast = __commonJS({
   "node_modules/tweetnacl/nacl-fast.js"(exports, module) {
     (function(nacl2) {
       "use strict";
-      var gf = function(init) {
+      var gf = /* @__PURE__ */ __name(function(init) {
         var i, r = new Float64Array(16);
         if (init)
           for (i = 0; i < init.length; i++)
             r[i] = init[i];
         return r;
-      };
-      var randombytes = function() {
+      }, "gf");
+      var randombytes = /* @__PURE__ */ __name(function() {
         throw new Error("no PRNG");
-      };
+      }, "randombytes");
       var _0 = new Uint8Array(16);
       var _9 = new Uint8Array(32);
       _9[0] = 9;
@@ -66,18 +67,22 @@ var require_nacl_fast = __commonJS({
         x[i + 6] = l >> 8 & 255;
         x[i + 7] = l & 255;
       }
+      __name(ts64, "ts64");
       function vn(x, xi, y, yi, n) {
         var i, d = 0;
         for (i = 0; i < n; i++)
           d |= x[xi + i] ^ y[yi + i];
         return (1 & d - 1 >>> 8) - 1;
       }
+      __name(vn, "vn");
       function crypto_verify_16(x, xi, y, yi) {
         return vn(x, xi, y, yi, 16);
       }
+      __name(crypto_verify_16, "crypto_verify_16");
       function crypto_verify_32(x, xi, y, yi) {
         return vn(x, xi, y, yi, 32);
       }
+      __name(crypto_verify_32, "crypto_verify_32");
       function core_salsa20(o, p, k, c) {
         var j0 = c[0] & 255 | (c[1] & 255) << 8 | (c[2] & 255) << 16 | (c[3] & 255) << 24, j1 = k[0] & 255 | (k[1] & 255) << 8 | (k[2] & 255) << 16 | (k[3] & 255) << 24, j2 = k[4] & 255 | (k[5] & 255) << 8 | (k[6] & 255) << 16 | (k[7] & 255) << 24, j3 = k[8] & 255 | (k[9] & 255) << 8 | (k[10] & 255) << 16 | (k[11] & 255) << 24, j4 = k[12] & 255 | (k[13] & 255) << 8 | (k[14] & 255) << 16 | (k[15] & 255) << 24, j5 = c[4] & 255 | (c[5] & 255) << 8 | (c[6] & 255) << 16 | (c[7] & 255) << 24, j6 = p[0] & 255 | (p[1] & 255) << 8 | (p[2] & 255) << 16 | (p[3] & 255) << 24, j7 = p[4] & 255 | (p[5] & 255) << 8 | (p[6] & 255) << 16 | (p[7] & 255) << 24, j8 = p[8] & 255 | (p[9] & 255) << 8 | (p[10] & 255) << 16 | (p[11] & 255) << 24, j9 = p[12] & 255 | (p[13] & 255) << 8 | (p[14] & 255) << 16 | (p[15] & 255) << 24, j10 = c[8] & 255 | (c[9] & 255) << 8 | (c[10] & 255) << 16 | (c[11] & 255) << 24, j11 = k[16] & 255 | (k[17] & 255) << 8 | (k[18] & 255) << 16 | (k[19] & 255) << 24, j12 = k[20] & 255 | (k[21] & 255) << 8 | (k[22] & 255) << 16 | (k[23] & 255) << 24, j13 = k[24] & 255 | (k[25] & 255) << 8 | (k[26] & 255) << 16 | (k[27] & 255) << 24, j14 = k[28] & 255 | (k[29] & 255) << 8 | (k[30] & 255) << 16 | (k[31] & 255) << 24, j15 = c[12] & 255 | (c[13] & 255) << 8 | (c[14] & 255) << 16 | (c[15] & 255) << 24;
         var x0 = j0, x1 = j1, x2 = j2, x3 = j3, x4 = j4, x5 = j5, x6 = j6, x7 = j7, x8 = j8, x9 = j9, x10 = j10, x11 = j11, x12 = j12, x13 = j13, x14 = j14, x15 = j15, u;
@@ -228,6 +233,7 @@ var require_nacl_fast = __commonJS({
         o[62] = x15 >>> 16 & 255;
         o[63] = x15 >>> 24 & 255;
       }
+      __name(core_salsa20, "core_salsa20");
       function core_hsalsa20(o, p, k, c) {
         var j0 = c[0] & 255 | (c[1] & 255) << 8 | (c[2] & 255) << 16 | (c[3] & 255) << 24, j1 = k[0] & 255 | (k[1] & 255) << 8 | (k[2] & 255) << 16 | (k[3] & 255) << 24, j2 = k[4] & 255 | (k[5] & 255) << 8 | (k[6] & 255) << 16 | (k[7] & 255) << 24, j3 = k[8] & 255 | (k[9] & 255) << 8 | (k[10] & 255) << 16 | (k[11] & 255) << 24, j4 = k[12] & 255 | (k[13] & 255) << 8 | (k[14] & 255) << 16 | (k[15] & 255) << 24, j5 = c[4] & 255 | (c[5] & 255) << 8 | (c[6] & 255) << 16 | (c[7] & 255) << 24, j6 = p[0] & 255 | (p[1] & 255) << 8 | (p[2] & 255) << 16 | (p[3] & 255) << 24, j7 = p[4] & 255 | (p[5] & 255) << 8 | (p[6] & 255) << 16 | (p[7] & 255) << 24, j8 = p[8] & 255 | (p[9] & 255) << 8 | (p[10] & 255) << 16 | (p[11] & 255) << 24, j9 = p[12] & 255 | (p[13] & 255) << 8 | (p[14] & 255) << 16 | (p[15] & 255) << 24, j10 = c[8] & 255 | (c[9] & 255) << 8 | (c[10] & 255) << 16 | (c[11] & 255) << 24, j11 = k[16] & 255 | (k[17] & 255) << 8 | (k[18] & 255) << 16 | (k[19] & 255) << 24, j12 = k[20] & 255 | (k[21] & 255) << 8 | (k[22] & 255) << 16 | (k[23] & 255) << 24, j13 = k[24] & 255 | (k[25] & 255) << 8 | (k[26] & 255) << 16 | (k[27] & 255) << 24, j14 = k[28] & 255 | (k[29] & 255) << 8 | (k[30] & 255) << 16 | (k[31] & 255) << 24, j15 = c[12] & 255 | (c[13] & 255) << 8 | (c[14] & 255) << 16 | (c[15] & 255) << 24;
         var x0 = j0, x1 = j1, x2 = j2, x3 = j3, x4 = j4, x5 = j5, x6 = j6, x7 = j7, x8 = j8, x9 = j9, x10 = j10, x11 = j11, x12 = j12, x13 = j13, x14 = j14, x15 = j15, u;
@@ -330,12 +336,15 @@ var require_nacl_fast = __commonJS({
         o[30] = x9 >>> 16 & 255;
         o[31] = x9 >>> 24 & 255;
       }
+      __name(core_hsalsa20, "core_hsalsa20");
       function crypto_core_salsa20(out, inp, k, c) {
         core_salsa20(out, inp, k, c);
       }
+      __name(crypto_core_salsa20, "crypto_core_salsa20");
       function crypto_core_hsalsa20(out, inp, k, c) {
         core_hsalsa20(out, inp, k, c);
       }
+      __name(crypto_core_hsalsa20, "crypto_core_hsalsa20");
       var sigma = new Uint8Array([101, 120, 112, 97, 110, 100, 32, 51, 50, 45, 98, 121, 116, 101, 32, 107]);
       function crypto_stream_salsa20_xor(c, cpos, m, mpos, b, n, k) {
         var z = new Uint8Array(16), x = new Uint8Array(64);
@@ -365,6 +374,7 @@ var require_nacl_fast = __commonJS({
         }
         return 0;
       }
+      __name(crypto_stream_salsa20_xor, "crypto_stream_salsa20_xor");
       function crypto_stream_salsa20(c, cpos, b, n, k) {
         var z = new Uint8Array(16), x = new Uint8Array(64);
         var u, i;
@@ -392,6 +402,7 @@ var require_nacl_fast = __commonJS({
         }
         return 0;
       }
+      __name(crypto_stream_salsa20, "crypto_stream_salsa20");
       function crypto_stream(c, cpos, d, n, k) {
         var s = new Uint8Array(32);
         crypto_core_hsalsa20(s, n, k, sigma);
@@ -400,6 +411,7 @@ var require_nacl_fast = __commonJS({
           sn[i] = n[i + 16];
         return crypto_stream_salsa20(c, cpos, d, sn, s);
       }
+      __name(crypto_stream, "crypto_stream");
       function crypto_stream_xor(c, cpos, m, mpos, d, n, k) {
         var s = new Uint8Array(32);
         crypto_core_hsalsa20(s, n, k, sigma);
@@ -408,7 +420,8 @@ var require_nacl_fast = __commonJS({
           sn[i] = n[i + 16];
         return crypto_stream_salsa20_xor(c, cpos, m, mpos, d, sn, s);
       }
-      var poly1305 = function(key) {
+      __name(crypto_stream_xor, "crypto_stream_xor");
+      var poly1305 = /* @__PURE__ */ __name(function(key) {
         this.buffer = new Uint8Array(16);
         this.r = new Uint16Array(10);
         this.h = new Uint16Array(10);
@@ -442,7 +455,7 @@ var require_nacl_fast = __commonJS({
         this.pad[5] = key[26] & 255 | (key[27] & 255) << 8;
         this.pad[6] = key[28] & 255 | (key[29] & 255) << 8;
         this.pad[7] = key[30] & 255 | (key[31] & 255) << 8;
-      };
+      }, "poly1305");
       poly1305.prototype.blocks = function(m, mpos, bytes) {
         var hibit = this.fin ? 0 : 1 << 11;
         var t0, t1, t2, t3, t4, t5, t6, t7, c;
@@ -753,11 +766,13 @@ var require_nacl_fast = __commonJS({
         s.finish(out, outpos);
         return 0;
       }
+      __name(crypto_onetimeauth, "crypto_onetimeauth");
       function crypto_onetimeauth_verify(h, hpos, m, mpos, n, k) {
         var x = new Uint8Array(16);
         crypto_onetimeauth(x, 0, m, mpos, n, k);
         return crypto_verify_16(h, hpos, x, 0);
       }
+      __name(crypto_onetimeauth_verify, "crypto_onetimeauth_verify");
       function crypto_secretbox(c, m, d, n, k) {
         var i;
         if (d < 32)
@@ -768,6 +783,7 @@ var require_nacl_fast = __commonJS({
           c[i] = 0;
         return 0;
       }
+      __name(crypto_secretbox, "crypto_secretbox");
       function crypto_secretbox_open(m, c, d, n, k) {
         var i;
         var x = new Uint8Array(32);
@@ -781,11 +797,13 @@ var require_nacl_fast = __commonJS({
           m[i] = 0;
         return 0;
       }
+      __name(crypto_secretbox_open, "crypto_secretbox_open");
       function set25519(r, a) {
         var i;
         for (i = 0; i < 16; i++)
           r[i] = a[i] | 0;
       }
+      __name(set25519, "set25519");
       function car25519(o) {
         var i, v, c = 1;
         for (i = 0; i < 16; i++) {
@@ -795,6 +813,7 @@ var require_nacl_fast = __commonJS({
         }
         o[0] += c - 1 + 37 * (c - 1);
       }
+      __name(car25519, "car25519");
       function sel25519(p, q, b) {
         var t, c = ~(b - 1);
         for (var i = 0; i < 16; i++) {
@@ -803,6 +822,7 @@ var require_nacl_fast = __commonJS({
           q[i] ^= t;
         }
       }
+      __name(sel25519, "sel25519");
       function pack25519(o, n) {
         var i, j, b;
         var m = gf(), t = gf();
@@ -827,31 +847,37 @@ var require_nacl_fast = __commonJS({
           o[2 * i + 1] = t[i] >> 8;
         }
       }
+      __name(pack25519, "pack25519");
       function neq25519(a, b) {
         var c = new Uint8Array(32), d = new Uint8Array(32);
         pack25519(c, a);
         pack25519(d, b);
         return crypto_verify_32(c, 0, d, 0);
       }
+      __name(neq25519, "neq25519");
       function par25519(a) {
         var d = new Uint8Array(32);
         pack25519(d, a);
         return d[0] & 1;
       }
+      __name(par25519, "par25519");
       function unpack25519(o, n) {
         var i;
         for (i = 0; i < 16; i++)
           o[i] = n[2 * i] + (n[2 * i + 1] << 8);
         o[15] &= 32767;
       }
+      __name(unpack25519, "unpack25519");
       function A(o, a, b) {
         for (var i = 0; i < 16; i++)
           o[i] = a[i] + b[i];
       }
+      __name(A, "A");
       function Z(o, a, b) {
         for (var i = 0; i < 16; i++)
           o[i] = a[i] - b[i];
       }
+      __name(Z, "Z");
       function M(o, a, b) {
         var v, c, t0 = 0, t1 = 0, t2 = 0, t3 = 0, t4 = 0, t5 = 0, t6 = 0, t7 = 0, t8 = 0, t9 = 0, t10 = 0, t11 = 0, t12 = 0, t13 = 0, t14 = 0, t15 = 0, t16 = 0, t17 = 0, t18 = 0, t19 = 0, t20 = 0, t21 = 0, t22 = 0, t23 = 0, t24 = 0, t25 = 0, t26 = 0, t27 = 0, t28 = 0, t29 = 0, t30 = 0, b0 = b[0], b1 = b[1], b2 = b[2], b3 = b[3], b4 = b[4], b5 = b[5], b6 = b[6], b7 = b[7], b8 = b[8], b9 = b[9], b10 = b[10], b11 = b[11], b12 = b[12], b13 = b[13], b14 = b[14], b15 = b[15];
         v = a[0];
@@ -1258,9 +1284,11 @@ var require_nacl_fast = __commonJS({
         o[14] = t14;
         o[15] = t15;
       }
+      __name(M, "M");
       function S(o, a) {
         M(o, a, a);
       }
+      __name(S, "S");
       function inv25519(o, i) {
         var c = gf();
         var a;
@@ -1274,6 +1302,7 @@ var require_nacl_fast = __commonJS({
         for (a = 0; a < 16; a++)
           o[a] = c[a];
       }
+      __name(inv25519, "inv25519");
       function pow2523(o, i) {
         var c = gf();
         var a;
@@ -1287,6 +1316,7 @@ var require_nacl_fast = __commonJS({
         for (a = 0; a < 16; a++)
           o[a] = c[a];
       }
+      __name(pow2523, "pow2523");
       function crypto_scalarmult(q, n, p) {
         var z = new Uint8Array(32);
         var x = new Float64Array(80), r, i;
@@ -1339,18 +1369,22 @@ var require_nacl_fast = __commonJS({
         pack25519(q, x16);
         return 0;
       }
+      __name(crypto_scalarmult, "crypto_scalarmult");
       function crypto_scalarmult_base(q, n) {
         return crypto_scalarmult(q, n, _9);
       }
+      __name(crypto_scalarmult_base, "crypto_scalarmult_base");
       function crypto_box_keypair(y, x) {
         randombytes(x, 32);
         return crypto_scalarmult_base(y, x);
       }
+      __name(crypto_box_keypair, "crypto_box_keypair");
       function crypto_box_beforenm(k, y, x) {
         var s = new Uint8Array(32);
         crypto_scalarmult(s, x, y);
         return crypto_core_hsalsa20(k, _0, s, sigma);
       }
+      __name(crypto_box_beforenm, "crypto_box_beforenm");
       var crypto_box_afternm = crypto_secretbox;
       var crypto_box_open_afternm = crypto_secretbox_open;
       function crypto_box(c, m, d, n, y, x) {
@@ -1358,11 +1392,13 @@ var require_nacl_fast = __commonJS({
         crypto_box_beforenm(k, y, x);
         return crypto_box_afternm(c, m, d, n, k);
       }
+      __name(crypto_box, "crypto_box");
       function crypto_box_open(m, c, d, n, y, x) {
         var k = new Uint8Array(32);
         crypto_box_beforenm(k, y, x);
         return crypto_box_open_afternm(m, c, d, n, k);
       }
+      __name(crypto_box_open, "crypto_box_open");
       var K = [
         1116352408,
         3609767458,
@@ -1822,6 +1858,7 @@ var require_nacl_fast = __commonJS({
         }
         return n;
       }
+      __name(crypto_hashblocks_hl, "crypto_hashblocks_hl");
       function crypto_hash(out, m, n) {
         var hh = new Int32Array(8), hl = new Int32Array(8), x = new Uint8Array(256), i, b = n;
         hh[0] = 1779033703;
@@ -1853,6 +1890,7 @@ var require_nacl_fast = __commonJS({
           ts64(out, 8 * i, hh[i], hl[i]);
         return 0;
       }
+      __name(crypto_hash, "crypto_hash");
       function add(p, q) {
         var a = gf(), b = gf(), c = gf(), d = gf(), e = gf(), f = gf(), g = gf(), h = gf(), t = gf();
         Z(a, p[1], p[0]);
@@ -1874,12 +1912,14 @@ var require_nacl_fast = __commonJS({
         M(p[2], g, f);
         M(p[3], e, h);
       }
+      __name(add, "add");
       function cswap(p, q, b) {
         var i;
         for (i = 0; i < 4; i++) {
           sel25519(p[i], q[i], b);
         }
       }
+      __name(cswap, "cswap");
       function pack(r, p) {
         var tx = gf(), ty = gf(), zi = gf();
         inv25519(zi, p[2]);
@@ -1888,6 +1928,7 @@ var require_nacl_fast = __commonJS({
         pack25519(r, ty);
         r[31] ^= par25519(tx) << 7;
       }
+      __name(pack, "pack");
       function scalarmult(p, q, s) {
         var b, i;
         set25519(p[0], gf0);
@@ -1902,6 +1943,7 @@ var require_nacl_fast = __commonJS({
           cswap(p, q, b);
         }
       }
+      __name(scalarmult, "scalarmult");
       function scalarbase(p, s) {
         var q = [gf(), gf(), gf(), gf()];
         set25519(q[0], X);
@@ -1910,6 +1952,7 @@ var require_nacl_fast = __commonJS({
         M(q[3], X, Y);
         scalarmult(p, q, s);
       }
+      __name(scalarbase, "scalarbase");
       function crypto_sign_keypair(pk, sk, seeded) {
         var d = new Uint8Array(64);
         var p = [gf(), gf(), gf(), gf()];
@@ -1926,6 +1969,7 @@ var require_nacl_fast = __commonJS({
           sk[i + 32] = pk[i];
         return 0;
       }
+      __name(crypto_sign_keypair, "crypto_sign_keypair");
       var L = new Float64Array([237, 211, 245, 92, 26, 99, 18, 88, 214, 156, 247, 162, 222, 249, 222, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16]);
       function modL(r, x) {
         var carry, i, j, k;
@@ -1952,6 +1996,7 @@ var require_nacl_fast = __commonJS({
           r[i] = x[i] & 255;
         }
       }
+      __name(modL, "modL");
       function reduce(r) {
         var x = new Float64Array(64), i;
         for (i = 0; i < 64; i++)
@@ -1960,6 +2005,7 @@ var require_nacl_fast = __commonJS({
           r[i] = 0;
         modL(r, x);
       }
+      __name(reduce, "reduce");
       function crypto_sign(sm, m, n, sk) {
         var d = new Uint8Array(64), h = new Uint8Array(64), r = new Uint8Array(64);
         var i, j, x = new Float64Array(64);
@@ -1993,6 +2039,7 @@ var require_nacl_fast = __commonJS({
         modL(sm.subarray(32), x);
         return smlen;
       }
+      __name(crypto_sign, "crypto_sign");
       function unpackneg(r, p) {
         var t = gf(), chk = gf(), num = gf(), den = gf(), den2 = gf(), den4 = gf(), den6 = gf();
         set25519(r[2], gf1);
@@ -2024,6 +2071,7 @@ var require_nacl_fast = __commonJS({
         M(r[3], r[0], r[1]);
         return 0;
       }
+      __name(unpackneg, "unpackneg");
       function crypto_sign_open(m, sm, n, pk) {
         var i;
         var t = new Uint8Array(32), h = new Uint8Array(64);
@@ -2052,6 +2100,7 @@ var require_nacl_fast = __commonJS({
           m[i] = sm[i + 64];
         return n;
       }
+      __name(crypto_sign_open, "crypto_sign_open");
       var crypto_secretbox_KEYBYTES = 32, crypto_secretbox_NONCEBYTES = 24, crypto_secretbox_ZEROBYTES = 32, crypto_secretbox_BOXZEROBYTES = 16, crypto_scalarmult_BYTES = 32, crypto_scalarmult_SCALARBYTES = 32, crypto_box_PUBLICKEYBYTES = 32, crypto_box_SECRETKEYBYTES = 32, crypto_box_BEFORENMBYTES = 32, crypto_box_NONCEBYTES = crypto_secretbox_NONCEBYTES, crypto_box_ZEROBYTES = crypto_secretbox_ZEROBYTES, crypto_box_BOXZEROBYTES = crypto_secretbox_BOXZEROBYTES, crypto_sign_BYTES = 64, crypto_sign_PUBLICKEYBYTES = 32, crypto_sign_SECRETKEYBYTES = 64, crypto_sign_SEEDBYTES = 32, crypto_hash_BYTES = 64;
       nacl2.lowlevel = {
         crypto_core_hsalsa20,
@@ -2115,22 +2164,26 @@ var require_nacl_fast = __commonJS({
         if (n.length !== crypto_secretbox_NONCEBYTES)
           throw new Error("bad nonce size");
       }
+      __name(checkLengths, "checkLengths");
       function checkBoxLengths(pk, sk) {
         if (pk.length !== crypto_box_PUBLICKEYBYTES)
           throw new Error("bad public key size");
         if (sk.length !== crypto_box_SECRETKEYBYTES)
           throw new Error("bad secret key size");
       }
+      __name(checkBoxLengths, "checkBoxLengths");
       function checkArrayTypes() {
         for (var i = 0; i < arguments.length; i++) {
           if (!(arguments[i] instanceof Uint8Array))
             throw new TypeError("unexpected type, use Uint8Array");
         }
       }
+      __name(checkArrayTypes, "checkArrayTypes");
       function cleanup(arr) {
         for (var i = 0; i < arr.length; i++)
           arr[i] = 0;
       }
+      __name(cleanup, "cleanup");
       nacl2.randomBytes = function(n) {
         var b = new Uint8Array(n);
         randombytes(b, n);
@@ -2446,12 +2499,12 @@ var require_sha256 = __commonJS({
           return typeof obj === "object" && obj.buffer && obj.buffer.constructor === ArrayBuffer;
         };
       }
-      var createOutputMethod = function(outputType, is224) {
+      var createOutputMethod = /* @__PURE__ */ __name(function(outputType, is224) {
         return function(message2) {
           return new Sha256(is224, true).update(message2)[outputType]();
         };
-      };
-      var createMethod = function(is224) {
+      }, "createOutputMethod");
+      var createMethod = /* @__PURE__ */ __name(function(is224) {
         var method = createOutputMethod("hex", is224);
         if (NODE_JS) {
           method = nodeWrap(method, is224);
@@ -2467,8 +2520,8 @@ var require_sha256 = __commonJS({
           method[type] = createOutputMethod(type, is224);
         }
         return method;
-      };
-      var nodeWrap = function(method, is224) {
+      }, "createMethod");
+      var nodeWrap = /* @__PURE__ */ __name(function(method, is224) {
         var crypto2 = require_crypto();
         var Buffer2 = require_buffer().Buffer;
         var algorithm = is224 ? "sha224" : "sha256";
@@ -2476,11 +2529,11 @@ var require_sha256 = __commonJS({
         if (Buffer2.from && !root.JS_SHA256_NO_BUFFER_FROM) {
           bufferFrom = Buffer2.from;
         } else {
-          bufferFrom = function(message2) {
+          bufferFrom = /* @__PURE__ */ __name(function(message2) {
             return new Buffer2(message2);
-          };
+          }, "bufferFrom");
         }
-        var nodeMethod = function(message2) {
+        var nodeMethod = /* @__PURE__ */ __name(function(message2) {
           if (typeof message2 === "string") {
             return crypto2.createHash(algorithm).update(message2, "utf8").digest("hex");
           } else {
@@ -2495,15 +2548,15 @@ var require_sha256 = __commonJS({
           } else {
             return method(message2);
           }
-        };
+        }, "nodeMethod");
         return nodeMethod;
-      };
-      var createHmacOutputMethod = function(outputType, is224) {
+      }, "nodeWrap");
+      var createHmacOutputMethod = /* @__PURE__ */ __name(function(outputType, is224) {
         return function(key, message2) {
           return new HmacSha256(key, is224, true).update(message2)[outputType]();
         };
-      };
-      var createHmacMethod = function(is224) {
+      }, "createHmacOutputMethod");
+      var createHmacMethod = /* @__PURE__ */ __name(function(is224) {
         var method = createHmacOutputMethod("hex", is224);
         method.create = function(key) {
           return new HmacSha256(key, is224);
@@ -2516,7 +2569,7 @@ var require_sha256 = __commonJS({
           method[type] = createHmacOutputMethod(type, is224);
         }
         return method;
-      };
+      }, "createHmacMethod");
       function Sha256(is224, sharedMemory) {
         if (sharedMemory) {
           blocks[0] = blocks[16] = blocks[1] = blocks[2] = blocks[3] = blocks[4] = blocks[5] = blocks[6] = blocks[7] = blocks[8] = blocks[9] = blocks[10] = blocks[11] = blocks[12] = blocks[13] = blocks[14] = blocks[15] = 0;
@@ -2548,6 +2601,7 @@ var require_sha256 = __commonJS({
         this.first = true;
         this.is224 = is224;
       }
+      __name(Sha256, "Sha256");
       Sha256.prototype.update = function(message2) {
         if (this.finalized) {
           return;
@@ -2830,6 +2884,7 @@ var require_sha256 = __commonJS({
         this.inner = true;
         this.sharedMemory = sharedMemory;
       }
+      __name(HmacSha256, "HmacSha256");
       HmacSha256.prototype = new Sha256();
       HmacSha256.prototype.finalize = function() {
         Sha256.prototype.finalize.call(this);
@@ -2869,7 +2924,7 @@ import { connect } from "cloudflare:sockets";
 
 // node_modules/jose/dist/browser/runtime/webcrypto.js
 var webcrypto_default = crypto;
-var isCryptoKey = (key) => key instanceof CryptoKey;
+var isCryptoKey = /* @__PURE__ */ __name((key) => key instanceof CryptoKey, "isCryptoKey");
 
 // node_modules/jose/dist/browser/lib/buffer_utils.js
 var encoder = new TextEncoder();
@@ -2885,9 +2940,10 @@ function concat(...buffers) {
   }
   return buf;
 }
+__name(concat, "concat");
 
 // node_modules/jose/dist/browser/runtime/base64url.js
-var encodeBase64 = (input) => {
+var encodeBase64 = /* @__PURE__ */ __name((input) => {
   let unencoded = input;
   if (typeof unencoded === "string") {
     unencoded = encoder.encode(unencoded);
@@ -2898,19 +2954,19 @@ var encodeBase64 = (input) => {
     arr.push(String.fromCharCode.apply(null, unencoded.subarray(i, i + CHUNK_SIZE)));
   }
   return btoa(arr.join(""));
-};
-var encode = (input) => {
+}, "encodeBase64");
+var encode = /* @__PURE__ */ __name((input) => {
   return encodeBase64(input).replace(/=/g, "").replace(/\+/g, "-").replace(/\//g, "_");
-};
-var decodeBase64 = (encoded) => {
+}, "encode");
+var decodeBase64 = /* @__PURE__ */ __name((encoded) => {
   const binary = atob(encoded);
   const bytes = new Uint8Array(binary.length);
   for (let i = 0; i < binary.length; i++) {
     bytes[i] = binary.charCodeAt(i);
   }
   return bytes;
-};
-var decode = (input) => {
+}, "decodeBase64");
+var decode = /* @__PURE__ */ __name((input) => {
   let encoded = input;
   if (encoded instanceof Uint8Array) {
     encoded = decoder.decode(encoded);
@@ -2921,7 +2977,7 @@ var decode = (input) => {
   } catch {
     throw new TypeError("The input to be decoded is not correctly encoded.");
   }
-};
+}, "decode");
 
 // node_modules/jose/dist/browser/util/errors.js
 var JOSEError = class extends Error {
@@ -2932,6 +2988,7 @@ var JOSEError = class extends Error {
     Error.captureStackTrace?.(this, this.constructor);
   }
 };
+__name(JOSEError, "JOSEError");
 JOSEError.code = "ERR_JOSE_GENERIC";
 var JWTClaimValidationFailed = class extends JOSEError {
   constructor(message2, payload, claim = "unspecified", reason = "unspecified") {
@@ -2942,6 +2999,7 @@ var JWTClaimValidationFailed = class extends JOSEError {
     this.payload = payload;
   }
 };
+__name(JWTClaimValidationFailed, "JWTClaimValidationFailed");
 JWTClaimValidationFailed.code = "ERR_JWT_CLAIM_VALIDATION_FAILED";
 var JWTExpired = class extends JOSEError {
   constructor(message2, payload, claim = "unspecified", reason = "unspecified") {
@@ -2952,6 +3010,7 @@ var JWTExpired = class extends JOSEError {
     this.payload = payload;
   }
 };
+__name(JWTExpired, "JWTExpired");
 JWTExpired.code = "ERR_JWT_EXPIRED";
 var JOSEAlgNotAllowed = class extends JOSEError {
   constructor() {
@@ -2959,6 +3018,7 @@ var JOSEAlgNotAllowed = class extends JOSEError {
     this.code = "ERR_JOSE_ALG_NOT_ALLOWED";
   }
 };
+__name(JOSEAlgNotAllowed, "JOSEAlgNotAllowed");
 JOSEAlgNotAllowed.code = "ERR_JOSE_ALG_NOT_ALLOWED";
 var JOSENotSupported = class extends JOSEError {
   constructor() {
@@ -2966,6 +3026,7 @@ var JOSENotSupported = class extends JOSEError {
     this.code = "ERR_JOSE_NOT_SUPPORTED";
   }
 };
+__name(JOSENotSupported, "JOSENotSupported");
 JOSENotSupported.code = "ERR_JOSE_NOT_SUPPORTED";
 var JWEDecryptionFailed = class extends JOSEError {
   constructor(message2 = "decryption operation failed", options) {
@@ -2973,6 +3034,7 @@ var JWEDecryptionFailed = class extends JOSEError {
     this.code = "ERR_JWE_DECRYPTION_FAILED";
   }
 };
+__name(JWEDecryptionFailed, "JWEDecryptionFailed");
 JWEDecryptionFailed.code = "ERR_JWE_DECRYPTION_FAILED";
 var JWEInvalid = class extends JOSEError {
   constructor() {
@@ -2980,6 +3042,7 @@ var JWEInvalid = class extends JOSEError {
     this.code = "ERR_JWE_INVALID";
   }
 };
+__name(JWEInvalid, "JWEInvalid");
 JWEInvalid.code = "ERR_JWE_INVALID";
 var JWSInvalid = class extends JOSEError {
   constructor() {
@@ -2987,6 +3050,7 @@ var JWSInvalid = class extends JOSEError {
     this.code = "ERR_JWS_INVALID";
   }
 };
+__name(JWSInvalid, "JWSInvalid");
 JWSInvalid.code = "ERR_JWS_INVALID";
 var JWTInvalid = class extends JOSEError {
   constructor() {
@@ -2994,6 +3058,7 @@ var JWTInvalid = class extends JOSEError {
     this.code = "ERR_JWT_INVALID";
   }
 };
+__name(JWTInvalid, "JWTInvalid");
 JWTInvalid.code = "ERR_JWT_INVALID";
 var JWKInvalid = class extends JOSEError {
   constructor() {
@@ -3001,6 +3066,7 @@ var JWKInvalid = class extends JOSEError {
     this.code = "ERR_JWK_INVALID";
   }
 };
+__name(JWKInvalid, "JWKInvalid");
 JWKInvalid.code = "ERR_JWK_INVALID";
 var JWKSInvalid = class extends JOSEError {
   constructor() {
@@ -3008,6 +3074,7 @@ var JWKSInvalid = class extends JOSEError {
     this.code = "ERR_JWKS_INVALID";
   }
 };
+__name(JWKSInvalid, "JWKSInvalid");
 JWKSInvalid.code = "ERR_JWKS_INVALID";
 var JWKSNoMatchingKey = class extends JOSEError {
   constructor(message2 = "no applicable key found in the JSON Web Key Set", options) {
@@ -3015,6 +3082,7 @@ var JWKSNoMatchingKey = class extends JOSEError {
     this.code = "ERR_JWKS_NO_MATCHING_KEY";
   }
 };
+__name(JWKSNoMatchingKey, "JWKSNoMatchingKey");
 JWKSNoMatchingKey.code = "ERR_JWKS_NO_MATCHING_KEY";
 var JWKSMultipleMatchingKeys = class extends JOSEError {
   constructor(message2 = "multiple matching keys found in the JSON Web Key Set", options) {
@@ -3022,6 +3090,7 @@ var JWKSMultipleMatchingKeys = class extends JOSEError {
     this.code = "ERR_JWKS_MULTIPLE_MATCHING_KEYS";
   }
 };
+__name(JWKSMultipleMatchingKeys, "JWKSMultipleMatchingKeys");
 JWKSMultipleMatchingKeys.code = "ERR_JWKS_MULTIPLE_MATCHING_KEYS";
 var JWKSTimeout = class extends JOSEError {
   constructor(message2 = "request timed out", options) {
@@ -3029,6 +3098,7 @@ var JWKSTimeout = class extends JOSEError {
     this.code = "ERR_JWKS_TIMEOUT";
   }
 };
+__name(JWKSTimeout, "JWKSTimeout");
 JWKSTimeout.code = "ERR_JWKS_TIMEOUT";
 var JWSSignatureVerificationFailed = class extends JOSEError {
   constructor(message2 = "signature verification failed", options) {
@@ -3036,18 +3106,22 @@ var JWSSignatureVerificationFailed = class extends JOSEError {
     this.code = "ERR_JWS_SIGNATURE_VERIFICATION_FAILED";
   }
 };
+__name(JWSSignatureVerificationFailed, "JWSSignatureVerificationFailed");
 JWSSignatureVerificationFailed.code = "ERR_JWS_SIGNATURE_VERIFICATION_FAILED";
 
 // node_modules/jose/dist/browser/lib/crypto_key.js
 function unusable(name, prop = "algorithm.name") {
   return new TypeError(`CryptoKey does not support this operation, its ${prop} must be ${name}`);
 }
+__name(unusable, "unusable");
 function isAlgorithm(algorithm, name) {
   return algorithm.name === name;
 }
+__name(isAlgorithm, "isAlgorithm");
 function getHashLength(hash) {
   return parseInt(hash.name.slice(4), 10);
 }
+__name(getHashLength, "getHashLength");
 function getNamedCurve(alg) {
   switch (alg) {
     case "ES256":
@@ -3060,6 +3134,7 @@ function getNamedCurve(alg) {
       throw new Error("unreachable");
   }
 }
+__name(getNamedCurve, "getNamedCurve");
 function checkUsage(key, usages) {
   if (usages.length && !usages.some((expected) => key.usages.includes(expected))) {
     let msg = "CryptoKey does not support this operation, its usages must include ";
@@ -3074,6 +3149,7 @@ function checkUsage(key, usages) {
     throw new TypeError(msg);
   }
 }
+__name(checkUsage, "checkUsage");
 function checkSigCryptoKey(key, alg, ...usages) {
   switch (alg) {
     case "HS256":
@@ -3131,6 +3207,7 @@ function checkSigCryptoKey(key, alg, ...usages) {
   }
   checkUsage(key, usages);
 }
+__name(checkSigCryptoKey, "checkSigCryptoKey");
 
 // node_modules/jose/dist/browser/lib/invalid_key_input.js
 function message(msg, actual, ...types2) {
@@ -3154,24 +3231,26 @@ function message(msg, actual, ...types2) {
   }
   return msg;
 }
-var invalid_key_input_default = (actual, ...types2) => {
+__name(message, "message");
+var invalid_key_input_default = /* @__PURE__ */ __name((actual, ...types2) => {
   return message("Key must be ", actual, ...types2);
-};
+}, "default");
 function withAlg(alg, actual, ...types2) {
   return message(`Key for the ${alg} algorithm must be `, actual, ...types2);
 }
+__name(withAlg, "withAlg");
 
 // node_modules/jose/dist/browser/runtime/is_key_like.js
-var is_key_like_default = (key) => {
+var is_key_like_default = /* @__PURE__ */ __name((key) => {
   if (isCryptoKey(key)) {
     return true;
   }
   return key?.[Symbol.toStringTag] === "KeyObject";
-};
+}, "default");
 var types = ["CryptoKey"];
 
 // node_modules/jose/dist/browser/lib/is_disjoint.js
-var isDisjoint = (...headers) => {
+var isDisjoint = /* @__PURE__ */ __name((...headers) => {
   const sources = headers.filter(Boolean);
   if (sources.length === 0 || sources.length === 1) {
     return true;
@@ -3191,13 +3270,14 @@ var isDisjoint = (...headers) => {
     }
   }
   return true;
-};
+}, "isDisjoint");
 var is_disjoint_default = isDisjoint;
 
 // node_modules/jose/dist/browser/lib/is_object.js
 function isObjectLike(value) {
   return typeof value === "object" && value !== null;
 }
+__name(isObjectLike, "isObjectLike");
 function isObject(input) {
   if (!isObjectLike(input) || Object.prototype.toString.call(input) !== "[object Object]") {
     return false;
@@ -3211,30 +3291,35 @@ function isObject(input) {
   }
   return Object.getPrototypeOf(input) === proto;
 }
+__name(isObject, "isObject");
 
 // node_modules/jose/dist/browser/runtime/check_key_length.js
-var check_key_length_default = (alg, key) => {
+var check_key_length_default = /* @__PURE__ */ __name((alg, key) => {
   if (alg.startsWith("RS") || alg.startsWith("PS")) {
     const { modulusLength } = key.algorithm;
     if (typeof modulusLength !== "number" || modulusLength < 2048) {
       throw new TypeError(`${alg} requires key modulusLength to be 2048 bits or larger`);
     }
   }
-};
+}, "default");
 
 // node_modules/jose/dist/browser/lib/is_jwk.js
 function isJWK(key) {
   return isObject(key) && typeof key.kty === "string";
 }
+__name(isJWK, "isJWK");
 function isPrivateJWK(key) {
   return key.kty !== "oct" && typeof key.d === "string";
 }
+__name(isPrivateJWK, "isPrivateJWK");
 function isPublicJWK(key) {
   return key.kty !== "oct" && typeof key.d === "undefined";
 }
+__name(isPublicJWK, "isPublicJWK");
 function isSecretJWK(key) {
   return isJWK(key) && key.kty === "oct" && typeof key.k === "string";
 }
+__name(isSecretJWK, "isSecretJWK");
 
 // node_modules/jose/dist/browser/runtime/jwk_to_key.js
 function subtleMapping(jwk) {
@@ -3319,7 +3404,8 @@ function subtleMapping(jwk) {
   }
   return { algorithm, keyUsages };
 }
-var parse = async (jwk) => {
+__name(subtleMapping, "subtleMapping");
+var parse = /* @__PURE__ */ __name(async (jwk) => {
   if (!jwk.alg) {
     throw new TypeError('"alg" argument is required when "jwk.alg" is not present');
   }
@@ -3333,17 +3419,17 @@ var parse = async (jwk) => {
   delete keyData.alg;
   delete keyData.use;
   return webcrypto_default.subtle.importKey("jwk", keyData, ...rest);
-};
+}, "parse");
 var jwk_to_key_default = parse;
 
 // node_modules/jose/dist/browser/runtime/normalize_key.js
-var exportKeyValue = (k) => decode(k);
+var exportKeyValue = /* @__PURE__ */ __name((k) => decode(k), "exportKeyValue");
 var privCache;
 var pubCache;
-var isKeyObject = (key) => {
+var isKeyObject = /* @__PURE__ */ __name((key) => {
   return key?.[Symbol.toStringTag] === "KeyObject";
-};
-var importAndCache = async (cache, key, jwk, alg, freeze = false) => {
+}, "isKeyObject");
+var importAndCache = /* @__PURE__ */ __name(async (cache, key, jwk, alg, freeze = false) => {
   let cached = cache.get(key);
   if (cached?.[alg]) {
     return cached[alg];
@@ -3357,8 +3443,8 @@ var importAndCache = async (cache, key, jwk, alg, freeze = false) => {
     cached[alg] = cryptoKey;
   }
   return cryptoKey;
-};
-var normalizePublicKey = (key, alg) => {
+}, "importAndCache");
+var normalizePublicKey = /* @__PURE__ */ __name((key, alg) => {
   if (isKeyObject(key)) {
     let jwk = key.export({ format: "jwk" });
     delete jwk.d;
@@ -3381,8 +3467,8 @@ var normalizePublicKey = (key, alg) => {
     return cryptoKey;
   }
   return key;
-};
-var normalizePrivateKey = (key, alg) => {
+}, "normalizePublicKey");
+var normalizePrivateKey = /* @__PURE__ */ __name((key, alg) => {
   if (isKeyObject(key)) {
     let jwk = key.export({ format: "jwk" });
     if (jwk.k) {
@@ -3399,7 +3485,7 @@ var normalizePrivateKey = (key, alg) => {
     return cryptoKey;
   }
   return key;
-};
+}, "normalizePrivateKey");
 var normalize_key_default = { normalizePublicKey, normalizePrivateKey };
 
 // node_modules/jose/dist/browser/key/import.js
@@ -3425,10 +3511,11 @@ async function importJWK(jwk, alg) {
       throw new JOSENotSupported('Unsupported "kty" (Key Type) Parameter value');
   }
 }
+__name(importJWK, "importJWK");
 
 // node_modules/jose/dist/browser/lib/check_key_type.js
-var tag = (key) => key?.[Symbol.toStringTag];
-var jwkMatchesOp = (alg, key, usage) => {
+var tag = /* @__PURE__ */ __name((key) => key?.[Symbol.toStringTag], "tag");
+var jwkMatchesOp = /* @__PURE__ */ __name((alg, key, usage) => {
   if (key.use !== void 0 && key.use !== "sig") {
     throw new TypeError("Invalid key for this operation, when present its use must be sig");
   }
@@ -3439,8 +3526,8 @@ var jwkMatchesOp = (alg, key, usage) => {
     throw new TypeError(`Invalid key for this operation, when present its alg must be ${alg}`);
   }
   return true;
-};
-var symmetricTypeCheck = (alg, key, usage, allowJwk) => {
+}, "jwkMatchesOp");
+var symmetricTypeCheck = /* @__PURE__ */ __name((alg, key, usage, allowJwk) => {
   if (key instanceof Uint8Array)
     return;
   if (allowJwk && isJWK(key)) {
@@ -3454,8 +3541,8 @@ var symmetricTypeCheck = (alg, key, usage, allowJwk) => {
   if (key.type !== "secret") {
     throw new TypeError(`${tag(key)} instances for symmetric algorithms must be of type "secret"`);
   }
-};
-var asymmetricTypeCheck = (alg, key, usage, allowJwk) => {
+}, "symmetricTypeCheck");
+var asymmetricTypeCheck = /* @__PURE__ */ __name((alg, key, usage, allowJwk) => {
   if (allowJwk && isJWK(key)) {
     switch (usage) {
       case "sign":
@@ -3486,7 +3573,7 @@ var asymmetricTypeCheck = (alg, key, usage, allowJwk) => {
   if (key.algorithm && usage === "encrypt" && key.type === "private") {
     throw new TypeError(`${tag(key)} instances for asymmetric algorithm encryption must be of type "public"`);
   }
-};
+}, "asymmetricTypeCheck");
 function checkKeyType(allowJwk, alg, key, usage) {
   const symmetric = alg.startsWith("HS") || alg === "dir" || alg.startsWith("PBES2") || /^A\d{3}(?:GCM)?KW$/.test(alg);
   if (symmetric) {
@@ -3495,6 +3582,7 @@ function checkKeyType(allowJwk, alg, key, usage) {
     asymmetricTypeCheck(alg, key, usage, allowJwk);
   }
 }
+__name(checkKeyType, "checkKeyType");
 var check_key_type_default = checkKeyType.bind(void 0, false);
 var checkKeyTypeWithJwk = checkKeyType.bind(void 0, true);
 
@@ -3528,10 +3616,11 @@ function validateCrit(Err, recognizedDefault, recognizedOption, protectedHeader,
   }
   return new Set(protectedHeader.crit);
 }
+__name(validateCrit, "validateCrit");
 var validate_crit_default = validateCrit;
 
 // node_modules/jose/dist/browser/lib/validate_algorithms.js
-var validateAlgorithms = (option, algorithms) => {
+var validateAlgorithms = /* @__PURE__ */ __name((option, algorithms) => {
   if (algorithms !== void 0 && (!Array.isArray(algorithms) || algorithms.some((s) => typeof s !== "string"))) {
     throw new TypeError(`"${option}" option must be an array of strings`);
   }
@@ -3539,7 +3628,7 @@ var validateAlgorithms = (option, algorithms) => {
     return void 0;
   }
   return new Set(algorithms);
-};
+}, "validateAlgorithms");
 var validate_algorithms_default = validateAlgorithms;
 
 // node_modules/jose/dist/browser/runtime/subtle_dsa.js
@@ -3568,6 +3657,7 @@ function subtleDsa(alg, algorithm) {
       throw new JOSENotSupported(`alg ${alg} is not supported either by JOSE or your javascript runtime`);
   }
 }
+__name(subtleDsa, "subtleDsa");
 
 // node_modules/jose/dist/browser/runtime/get_sign_verify_key.js
 async function getCryptoKey(alg, key, usage) {
@@ -3589,9 +3679,10 @@ async function getCryptoKey(alg, key, usage) {
   }
   throw new TypeError(invalid_key_input_default(key, ...types, "Uint8Array", "JSON Web Key"));
 }
+__name(getCryptoKey, "getCryptoKey");
 
 // node_modules/jose/dist/browser/runtime/verify.js
-var verify = async (alg, key, signature, data) => {
+var verify = /* @__PURE__ */ __name(async (alg, key, signature, data) => {
   const cryptoKey = await getCryptoKey(alg, key, "verify");
   check_key_length_default(alg, cryptoKey);
   const algorithm = subtleDsa(alg, cryptoKey.algorithm);
@@ -3600,7 +3691,7 @@ var verify = async (alg, key, signature, data) => {
   } catch {
     return false;
   }
-};
+}, "verify");
 var verify_default = verify;
 
 // node_modules/jose/dist/browser/jws/flattened/verify.js
@@ -3708,6 +3799,7 @@ async function flattenedVerify(jws, key, options) {
   }
   return result;
 }
+__name(flattenedVerify, "flattenedVerify");
 
 // node_modules/jose/dist/browser/jws/compact/verify.js
 async function compactVerify(jws, key, options) {
@@ -3728,9 +3820,10 @@ async function compactVerify(jws, key, options) {
   }
   return result;
 }
+__name(compactVerify, "compactVerify");
 
 // node_modules/jose/dist/browser/lib/epoch.js
-var epoch_default = (date) => Math.floor(date.getTime() / 1e3);
+var epoch_default = /* @__PURE__ */ __name((date) => Math.floor(date.getTime() / 1e3), "default");
 
 // node_modules/jose/dist/browser/lib/secs.js
 var minute = 60;
@@ -3739,7 +3832,7 @@ var day = hour * 24;
 var week = day * 7;
 var year = day * 365.25;
 var REGEX = /^(\+|\-)? ?(\d+|\d+\.\d+) ?(seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)(?: (ago|from now))?$/i;
-var secs_default = (str) => {
+var secs_default = /* @__PURE__ */ __name((str) => {
   const matched = REGEX.exec(str);
   if (!matched || matched[4] && matched[1]) {
     throw new TypeError("Invalid time period format");
@@ -3787,11 +3880,11 @@ var secs_default = (str) => {
     return -numericDate;
   }
   return numericDate;
-};
+}, "default");
 
 // node_modules/jose/dist/browser/lib/jwt_claims_set.js
-var normalizeTyp = (value) => value.toLowerCase().replace(/^application\//, "");
-var checkAudiencePresence = (audPayload, audOption) => {
+var normalizeTyp = /* @__PURE__ */ __name((value) => value.toLowerCase().replace(/^application\//, ""), "normalizeTyp");
+var checkAudiencePresence = /* @__PURE__ */ __name((audPayload, audOption) => {
   if (typeof audPayload === "string") {
     return audOption.includes(audPayload);
   }
@@ -3799,8 +3892,8 @@ var checkAudiencePresence = (audPayload, audOption) => {
     return audOption.some(Set.prototype.has.bind(new Set(audPayload)));
   }
   return false;
-};
-var jwt_claims_set_default = (protectedHeader, encodedPayload, options = {}) => {
+}, "checkAudiencePresence");
+var jwt_claims_set_default = /* @__PURE__ */ __name((protectedHeader, encodedPayload, options = {}) => {
   let payload;
   try {
     payload = JSON.parse(decoder.decode(encodedPayload));
@@ -3883,7 +3976,7 @@ var jwt_claims_set_default = (protectedHeader, encodedPayload, options = {}) => 
     }
   }
   return payload;
-};
+}, "default");
 
 // node_modules/jose/dist/browser/jwt/verify.js
 async function jwtVerify(jwt, key, options) {
@@ -3898,14 +3991,15 @@ async function jwtVerify(jwt, key, options) {
   }
   return result;
 }
+__name(jwtVerify, "jwtVerify");
 
 // node_modules/jose/dist/browser/runtime/sign.js
-var sign = async (alg, key, data) => {
+var sign = /* @__PURE__ */ __name(async (alg, key, data) => {
   const cryptoKey = await getCryptoKey(alg, key, "sign");
   check_key_length_default(alg, cryptoKey);
   const signature = await webcrypto_default.subtle.sign(subtleDsa(alg, cryptoKey.algorithm), cryptoKey, data);
   return new Uint8Array(signature);
-};
+}, "sign");
 var sign_default = sign;
 
 // node_modules/jose/dist/browser/jws/flattened/sign.js
@@ -3982,6 +4076,7 @@ var FlattenedSign = class {
     return jws;
   }
 };
+__name(FlattenedSign, "FlattenedSign");
 
 // node_modules/jose/dist/browser/jws/compact/sign.js
 var CompactSign = class {
@@ -4000,6 +4095,7 @@ var CompactSign = class {
     return `${jws.protected}.${jws.payload}.${jws.signature}`;
   }
 };
+__name(CompactSign, "CompactSign");
 
 // node_modules/jose/dist/browser/jwt/produce.js
 function validateInput(label, input) {
@@ -4008,6 +4104,7 @@ function validateInput(label, input) {
   }
   return input;
 }
+__name(validateInput, "validateInput");
 var ProduceJWT = class {
   constructor(payload = {}) {
     if (!isObject(payload)) {
@@ -4067,6 +4164,7 @@ var ProduceJWT = class {
     return this;
   }
 };
+__name(ProduceJWT, "ProduceJWT");
 
 // node_modules/jose/dist/browser/jwt/sign.js
 var SignJWT = class extends ProduceJWT {
@@ -4083,6 +4181,7 @@ var SignJWT = class extends ProduceJWT {
     return sig.sign(key, options);
   }
 };
+__name(SignJWT, "SignJWT");
 
 // src/worker.js
 var userID = "89b3cbba-e6ac-485a-9481-976a0415eab9";
@@ -4109,7 +4208,7 @@ var worker_default = {
       trojanPassword = env.TROJAN_PASS || trojanPassword;
       hashPassword = import_js_sha256.default.sha224(trojanPassword);
       if (!isValidUUID(userID))
-        throw new Error(`Invalid UUID: ${userID}`);
+        throw new Error(`\u65E0\u6548 UUID: ${userID}`);
       const upgradeHeader = request.headers.get("Upgrade");
       const url = new URL(request.url);
       if (!upgradeHeader || upgradeHeader !== "websocket") {
@@ -4118,7 +4217,7 @@ var worker_default = {
         const client = searchParams.get("app");
         const { kvNotFound, proxySettings: settings, warpConfigs } = await getDataset(env);
         if (kvNotFound) {
-          const errorPage = renderErrorPage("KV Dataset is not properly set!", null, true);
+          const errorPage = renderErrorPage("KV \u6570\u636E\u96C6\u672A\u6B63\u786E\u8BBE\u7F6E!", null, true);
           return new Response(errorPage, { status: 200, headers: { "Content-Type": "text/html" } });
         }
         switch (url.pathname) {
@@ -4139,14 +4238,14 @@ var worker_default = {
                 if (warpPlusError) {
                   return new Response(warpPlusError, { status: 400 });
                 } else {
-                  return new Response("Warp configs updated successfully", { status: 200 });
+                  return new Response("Warp \u914D\u7F6E\u66F4\u65B0\u6210\u529F", { status: 200 });
                 }
               } catch (error) {
                 console.log(error);
-                return new Response(`An error occurred while updating Warp configs! - ${error}`, { status: 500 });
+                return new Response(`\u66F4\u65B0 Warp \u914D\u7F6E\u65F6\u53D1\u751F\u9519\u8BEF! - ${error}`, { status: 500 });
               }
             } else {
-              return new Response("Unsupported request", { status: 405 });
+              return new Response("\u4E0D\u652F\u6301\u7684\u8BF7\u6C42", { status: 405 });
             }
           case `/sub/${userID}`:
             if (client === "sfa") {
@@ -4238,7 +4337,7 @@ var worker_default = {
             const isAuth = await Authenticate(request, env);
             if (request.method === "POST") {
               if (!isAuth)
-                return new Response("Unauthorized or expired session!", { status: 401 });
+                return new Response("\u4F1A\u8BDD\u672A\u6388\u6743\u6216\u5DF2\u8FC7\u671F!", { status: 401 });
               const formData = await request.formData();
               const isReset = formData.get("resetSettings") === "true";
               isReset ? await updateDataset(env, null, true) : await updateDataset(env, formData);
@@ -4262,7 +4361,7 @@ var worker_default = {
             });
           case "/login":
             if (typeof env.bpb !== "object") {
-              const errorPage = renderErrorPage("KV Dataset is not properly set!", null, true);
+              const errorPage = renderErrorPage("KV \u6570\u636E\u96C6\u672A\u6B63\u786E\u8BBE\u7F6E!", null, true);
               return new Response(errorPage, { status: 200, headers: { "Content-Type": "text/html" } });
             }
             const loginAuth = await Authenticate(request, env);
@@ -4315,10 +4414,10 @@ var worker_default = {
             const oldPwd = await env.bpb.get("pwd");
             let passAuth = await Authenticate(request, env);
             if (oldPwd && !passAuth)
-              return new Response("Unauthorized!", { status: 401 });
+              return new Response("\u672A\u6388\u6743!", { status: 401 });
             const newPwd = await request.text();
             if (newPwd === oldPwd)
-              return new Response("Please enter a new Password!", { status: 400 });
+              return new Response("\u8BF7\u8F93\u5165\u65B0\u5BC6\u7801!", { status: 400 });
             await env.bpb.put("pwd", newPwd);
             return new Response("Success", {
               status: 200,
@@ -4337,7 +4436,7 @@ var worker_default = {
         return url.pathname.startsWith("/tr") ? await trojanOverWSHandler(request) : await vlessOverWSHandler(request);
       }
     } catch (err) {
-      const errorPage = renderErrorPage("Something went wrong!", err, false);
+      const errorPage = renderErrorPage("\u53D1\u751F\u4E86\u9519\u8BEF!", err, false);
       return new Response(errorPage, { status: 200, headers: { "Content-Type": "text/html" } });
     }
   }
@@ -4348,9 +4447,9 @@ async function vlessOverWSHandler(request) {
   webSocket.accept();
   let address = "";
   let portWithRandomLog = "";
-  const log = (info, event) => {
+  const log = /* @__PURE__ */ __name((info, event) => {
     console.log(`[${address}:${portWithRandomLog}] ${info}`, event || "");
-  };
+  }, "log");
   const earlyDataHeader = request.headers.get("sec-websocket-protocol") || "";
   const readableWebSocketStream = makeReadableWebSocketStream(webSocket, earlyDataHeader, log);
   let remoteSocketWapper = {
@@ -4389,7 +4488,7 @@ async function vlessOverWSHandler(request) {
           if (portRemote === 53) {
             isDns = true;
           } else {
-            throw new Error("UDP proxy only enable for DNS which is port 53");
+            throw new Error("UDP \u4EE3\u7406\u4EC5\u5BF9\u7AEF\u53E3 53 \u7684 DNS \u542F\u7528");
             return;
           }
         }
@@ -4428,6 +4527,7 @@ async function vlessOverWSHandler(request) {
     webSocket: client
   });
 }
+__name(vlessOverWSHandler, "vlessOverWSHandler");
 async function checkUuidInApiResponse(targetUuid) {
   try {
     const apiResponse = await getApiResponse();
@@ -4441,15 +4541,16 @@ async function checkUuidInApiResponse(targetUuid) {
     return false;
   }
 }
+__name(checkUuidInApiResponse, "checkUuidInApiResponse");
 async function trojanOverWSHandler(request) {
   const webSocketPair = new WebSocketPair();
   const [client, webSocket] = Object.values(webSocketPair);
   webSocket.accept();
   let address = "";
   let portWithRandomLog = "";
-  const log = (info, event) => {
+  const log = /* @__PURE__ */ __name((info, event) => {
     console.log(`[${address}:${portWithRandomLog}] ${info}`, event || "");
-  };
+  }, "log");
   const earlyDataHeader = request.headers.get("sec-websocket-protocol") || "";
   const readableWebSocketStream = makeReadableWebSocketStream(webSocket, earlyDataHeader, log);
   let remoteSocketWapper = {
@@ -4499,6 +4600,7 @@ async function trojanOverWSHandler(request) {
     webSocket: client
   });
 }
+__name(trojanOverWSHandler, "trojanOverWSHandler");
 async function parseTrojanHeader(buffer) {
   if (buffer.byteLength < 56) {
     return {
@@ -4517,14 +4619,14 @@ async function parseTrojanHeader(buffer) {
   if (password !== hashPassword) {
     return {
       hasError: true,
-      message: "invalid password"
+      message: "\u5BC6\u7801\u65E0\u6548"
     };
   }
   const socks5DataBuffer = buffer.slice(crLfIndex + 2);
   if (socks5DataBuffer.byteLength < 6) {
     return {
       hasError: true,
-      message: "invalid SOCKS5 request data"
+      message: "SOCKS5\u8BF7\u6C42\u6570\u636E\u65E0\u6548"
     };
   }
   const view = new DataView(socks5DataBuffer);
@@ -4532,7 +4634,7 @@ async function parseTrojanHeader(buffer) {
   if (cmd !== 1) {
     return {
       hasError: true,
-      message: "unsupported command, only TCP (CONNECT) is allowed"
+      message: "\u4E0D\u652F\u6301\u7684\u547D\u4EE4\uFF0C\u4EC5\u5141\u8BB8 TCP (CONNECT)"
     };
   }
   const atype = view.getUint8(1);
@@ -4580,6 +4682,7 @@ async function parseTrojanHeader(buffer) {
     rawClientData: socks5DataBuffer.slice(portIndex + 4)
   };
 }
+__name(parseTrojanHeader, "parseTrojanHeader");
 async function handleTCPOutBound(request, remoteSocket, addressRemote, portRemote, rawClientData, webSocket, vlessResponseHeader, log) {
   async function connectAndWrite(address, port) {
     if (/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(address))
@@ -4595,6 +4698,7 @@ async function handleTCPOutBound(request, remoteSocket, addressRemote, portRemot
     writer.releaseLock();
     return tcpSocket2;
   }
+  __name(connectAndWrite, "connectAndWrite");
   async function retry() {
     const { pathname } = new URL(request.url);
     let panelProxyIP = pathname.split("/")[2];
@@ -4607,9 +4711,11 @@ async function handleTCPOutBound(request, remoteSocket, addressRemote, portRemot
     });
     vlessResponseHeader ? vlessRemoteSocketToWS(tcpSocket2, webSocket, vlessResponseHeader, null, log) : trojanRemoteSocketToWS(tcpSocket2, webSocket, null, log);
   }
+  __name(retry, "retry");
   const tcpSocket = await connectAndWrite(addressRemote, portRemote);
   vlessResponseHeader ? vlessRemoteSocketToWS(tcpSocket, webSocket, vlessResponseHeader, retry, log) : trojanRemoteSocketToWS(tcpSocket, webSocket, retry, log);
 }
+__name(handleTCPOutBound, "handleTCPOutBound");
 function makeReadableWebSocketStream(webSocketServer, earlyDataHeader, log) {
   let readableStreamCancel = false;
   const stream = new ReadableStream({
@@ -4652,11 +4758,12 @@ function makeReadableWebSocketStream(webSocketServer, earlyDataHeader, log) {
   });
   return stream;
 }
+__name(makeReadableWebSocketStream, "makeReadableWebSocketStream");
 async function processVlessHeader(vlessBuffer, userID2) {
   if (vlessBuffer.byteLength < 24) {
     return {
       hasError: true,
-      message: "invalid data"
+      message: "\u65E0\u6548\u6570\u636E"
     };
   }
   const version = new Uint8Array(vlessBuffer.slice(0, 1));
@@ -4671,7 +4778,7 @@ async function processVlessHeader(vlessBuffer, userID2) {
   if (!isValidUser) {
     return {
       hasError: true,
-      message: "invalid user"
+      message: "\u65E0\u6548\u7528\u6237"
     };
   }
   const optLength = new Uint8Array(vlessBuffer.slice(17, 18))[0];
@@ -4735,6 +4842,7 @@ async function processVlessHeader(vlessBuffer, userID2) {
     isUDP
   };
 }
+__name(processVlessHeader, "processVlessHeader");
 async function vlessRemoteSocketToWS(remoteSocket, webSocket, vlessResponseHeader, retry, log) {
   let remoteChunkCount = 0;
   let chunks = [];
@@ -4777,6 +4885,7 @@ async function vlessRemoteSocketToWS(remoteSocket, webSocket, vlessResponseHeade
     retry();
   }
 }
+__name(vlessRemoteSocketToWS, "vlessRemoteSocketToWS");
 async function trojanRemoteSocketToWS(remoteSocket, webSocket, retry, log) {
   let hasIncomingData = false;
   await remoteSocket.readable.pipeTo(
@@ -4811,6 +4920,7 @@ async function trojanRemoteSocketToWS(remoteSocket, webSocket, retry, log) {
     retry();
   }
 }
+__name(trojanRemoteSocketToWS, "trojanRemoteSocketToWS");
 function base64ToArrayBuffer(base64Str) {
   if (!base64Str) {
     return { earlyData: null, error: null };
@@ -4824,10 +4934,12 @@ function base64ToArrayBuffer(base64Str) {
     return { earlyData: null, error };
   }
 }
+__name(base64ToArrayBuffer, "base64ToArrayBuffer");
 function isValidUUID(uuid) {
   const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
   return uuidRegex.test(uuid);
 }
+__name(isValidUUID, "isValidUUID");
 var WS_READY_STATE_OPEN = 1;
 var WS_READY_STATE_CLOSING = 2;
 function safeCloseWebSocket(socket) {
@@ -4839,6 +4951,7 @@ function safeCloseWebSocket(socket) {
     console.error("safeCloseWebSocket error", error);
   }
 }
+__name(safeCloseWebSocket, "safeCloseWebSocket");
 var byteToHex = [];
 for (let i = 0; i < 256; ++i) {
   byteToHex.push((i + 256).toString(16).slice(1));
@@ -4846,6 +4959,7 @@ for (let i = 0; i < 256; ++i) {
 function unsafeStringify(arr, offset = 0) {
   return (byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + "-" + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + "-" + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + "-" + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + "-" + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]]).toLowerCase();
 }
+__name(unsafeStringify, "unsafeStringify");
 function stringify(arr, offset = 0) {
   const uuid = unsafeStringify(arr, offset);
   if (!isValidUUID(uuid)) {
@@ -4853,6 +4967,7 @@ function stringify(arr, offset = 0) {
   }
   return uuid;
 }
+__name(stringify, "stringify");
 async function handleUDPOutBound(webSocket, vlessResponseHeader, log) {
   let isVlessHeaderSent = false;
   const transformStream = new TransformStream({
@@ -4912,8 +5027,9 @@ async function handleUDPOutBound(webSocket, vlessResponseHeader, log) {
     }
   };
 }
-var generateKeyPair = () => {
-  const base64Encode = (array) => btoa(String.fromCharCode.apply(null, array));
+__name(handleUDPOutBound, "handleUDPOutBound");
+var generateKeyPair = /* @__PURE__ */ __name(() => {
+  const base64Encode = /* @__PURE__ */ __name((array) => btoa(String.fromCharCode.apply(null, array)), "base64Encode");
   let privateKey = import_tweetnacl.default.randomBytes(32);
   privateKey[0] &= 248;
   privateKey[31] &= 127;
@@ -4922,7 +5038,7 @@ var generateKeyPair = () => {
   const publicKeyBase64 = base64Encode(publicKey);
   const privateKeyBase64 = base64Encode(privateKey);
   return { publicKey: publicKeyBase64, privateKey: privateKeyBase64 };
-};
+}, "generateKeyPair");
 function generateRemark(index, port, address, cleanIPs, protocol, configType) {
   let remark = "";
   let addressType;
@@ -4930,24 +5046,29 @@ function generateRemark(index, port, address, cleanIPs, protocol, configType) {
   cleanIPs.includes(address) ? addressType = "Clean IP" : addressType = isDomain(address) ? "Domain" : isIPv4(address) ? "IPv4" : isIPv6(address) ? "IPv6" : "";
   return `\u{1F4A6} ${index} - ${protocol}${type} - ${addressType} : ${port}`;
 }
+__name(generateRemark, "generateRemark");
 function isDomain(address) {
   const domainPattern = /^(?!\-)(?:[A-Za-z0-9\-]{1,63}\.?)+[A-Za-z]{2,}$/;
   return domainPattern.test(address);
 }
+__name(isDomain, "isDomain");
 function isIPv4(address) {
   const ipv4Pattern = /^(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
   return ipv4Pattern.test(address);
 }
+__name(isIPv4, "isIPv4");
 function isIPv6(address) {
   const ipv6Pattern = /^\[(?:(?:[a-fA-F0-9]{1,4}:){7}[a-fA-F0-9]{1,4}|(?:[a-fA-F0-9]{1,4}:){1,7}:|::(?:[a-fA-F0-9]{1,4}:){0,7}|(?:[a-fA-F0-9]{1,4}:){1,6}:[a-fA-F0-9]{1,4}|(?:[a-fA-F0-9]{1,4}:){1,5}(?::[a-fA-F0-9]{1,4}){1,2}|(?:[a-fA-F0-9]{1,4}:){1,4}(?::[a-fA-F0-9]{1,4}){1,3}|(?:[a-fA-F0-9]{1,4}:){1,3}(?::[a-fA-F0-9]{1,4}){1,4}|(?:[a-fA-F0-9]{1,4}:){1,2}(?::[a-fA-F0-9]{1,4}){1,5}|[a-fA-F0-9]{1,4}:(?::[a-fA-F0-9]{1,4}){1,6})\]$/;
   return ipv6Pattern.test(address);
 }
+__name(isIPv6, "isIPv6");
 function base64ToDecimal(base64) {
   const binaryString = atob(base64);
   const hexString = Array.from(binaryString).map((char) => char.charCodeAt(0).toString(16).padStart(2, "0")).join("");
   const decimalArray = hexString.match(/.{2}/g).map((hex) => parseInt(hex, 16));
   return decimalArray;
 }
+__name(base64ToDecimal, "base64ToDecimal");
 async function getDataset(env) {
   let proxySettings, warpConfigs;
   if (typeof env.bpb !== "object") {
@@ -4958,19 +5079,20 @@ async function getDataset(env) {
     warpConfigs = await env.bpb.get("warpConfigs", { type: "json" });
   } catch (error) {
     console.log(error);
-    throw new Error(`An error occurred while getting KV - ${error}`);
+    throw new Error(`\u83B7\u53D6 KV \u65F6\u51FA\u9519 - ${error}`);
   }
   if (!proxySettings) {
     proxySettings = await updateDataset(env);
     const { error, configs } = await fetchWgConfig(env, proxySettings);
     if (error)
-      throw new Error(`An error occurred while getting Warp configs - ${error}`);
+      throw new Error(`\u83B7\u53D6 Warp \u914D\u7F6E\u65F6\u53D1\u751F\u9519\u8BEF - ${error}`);
     warpConfigs = configs;
   }
   if (panelVersion !== proxySettings.panelVersion)
     proxySettings = await updateDataset(env);
   return { kvNotFound: false, proxySettings, warpConfigs };
 }
+__name(getDataset, "getDataset");
 async function updateDataset(env, newSettings, resetSettings) {
   let currentSettings;
   if (!resetSettings) {
@@ -4978,12 +5100,12 @@ async function updateDataset(env, newSettings, resetSettings) {
       currentSettings = await env.bpb.get("proxySettings", { type: "json" });
     } catch (error) {
       console.log(error);
-      throw new Error(`An error occurred while getting current KV settings - ${error}`);
+      throw new Error(`\u83B7\u53D6\u5F53\u524D KV \u8BBE\u7F6E\u65F6\u53D1\u751F\u9519\u8BEF - ${error}`);
     }
   } else {
     await env.bpb.delete("warpConfigs");
   }
-  const validateField = (field) => {
+  const validateField = /* @__PURE__ */ __name((field) => {
     const fieldValue = newSettings?.get(field);
     if (fieldValue === void 0)
       return null;
@@ -4992,7 +5114,7 @@ async function updateDataset(env, newSettings, resetSettings) {
     if (fieldValue === "false")
       return false;
     return fieldValue;
-  };
+  }, "validateField");
   const remoteDNS = validateField("remoteDNS") ?? currentSettings?.remoteDNS ?? "https://8.8.8.8/dns-query";
   const url = new URL(remoteDNS);
   const remoteDNSServer = url.hostname;
@@ -5007,7 +5129,7 @@ async function updateDataset(env, newSettings, resetSettings) {
       };
     } catch (error) {
       console.log(error);
-      throw new Error(`An error occurred while resolving remote DNS server, please try agian! - ${error}`);
+      throw new Error(`\u89E3\u6790\u8FDC\u7A0B DNS \u670D\u52A1\u5668\u65F6\u51FA\u9519\uFF0C\u8BF7\u91CD\u8BD5! - ${error}`);
     }
   }
   const proxySettings = {
@@ -5061,6 +5183,7 @@ async function updateDataset(env, newSettings, resetSettings) {
   }
   return proxySettings;
 }
+__name(updateDataset, "updateDataset");
 function randomUpperCase(str) {
   let result = "";
   for (let i = 0; i < str.length; i++) {
@@ -5068,6 +5191,7 @@ function randomUpperCase(str) {
   }
   return result;
 }
+__name(randomUpperCase, "randomUpperCase");
 function getRandomPath(length) {
   let result = "";
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -5077,6 +5201,7 @@ function getRandomPath(length) {
   }
   return result;
 }
+__name(getRandomPath, "getRandomPath");
 async function resolveDNS(domain) {
   const dohURLv4 = `${dohURL}?name=${encodeURIComponent(domain)}&type=A`;
   const dohURLv6 = `${dohURL}?name=${encodeURIComponent(domain)}&type=AAAA`;
@@ -5092,9 +5217,10 @@ async function resolveDNS(domain) {
     return { ipv4, ipv6 };
   } catch (error) {
     console.error("Error resolving DNS:", error);
-    throw new Error(`An error occurred while resolving DNS - ${error}`);
+    throw new Error(`\u89E3\u6790 DNS \u65F6\u53D1\u751F\u9519\u8BEF - ${error}`);
   }
 }
+__name(resolveDNS, "resolveDNS");
 async function getConfigAddresses(hostName, cleanIPs, enableIPv6) {
   const resolved = await resolveDNS(hostName);
   const defaultIPv6 = enableIPv6 ? resolved.ipv6.map((ip) => `[${ip}]`) : [];
@@ -5106,14 +5232,17 @@ async function getConfigAddresses(hostName, cleanIPs, enableIPv6) {
     ...cleanIPs ? cleanIPs.split(",") : []
   ];
 }
+__name(getConfigAddresses, "getConfigAddresses");
 async function generateJWTToken(secretKey) {
   const secret = new TextEncoder().encode(secretKey);
   return await new SignJWT({ userID }).setProtectedHeader({ alg: "HS256" }).setIssuedAt().setExpirationTime("24h").sign(secret);
 }
+__name(generateJWTToken, "generateJWTToken");
 function generateSecretKey() {
   const key = import_tweetnacl.default.randomBytes(32);
   return Array.from(key, (byte) => byte.toString(16).padStart(2, "0")).join("");
 }
+__name(generateSecretKey, "generateSecretKey");
 async function Authenticate(request, env) {
   try {
     const secretKey = await env.bpb.get("secretKey");
@@ -5121,17 +5250,18 @@ async function Authenticate(request, env) {
     const cookie = request.headers.get("Cookie")?.match(/(^|;\s*)jwtToken=([^;]*)/);
     const token = cookie ? cookie[2] : null;
     if (!token) {
-      console.log("Unauthorized: Token not available!");
+      console.log("\u672A\u7ECF\u6388\u6743\uFF1A\u4EE4\u724C\u4E0D\u53EF\u7528!");
       return false;
     }
     const { payload } = await jwtVerify(token, secret);
-    console.log(`Successfully logined, User ID: ${payload.userID}`);
+    console.log(`\u6210\u529F\u767B\u5F55\uFF0C\u7528\u6237 ID: ${payload.userID}`);
     return true;
   } catch (error) {
     console.log(error);
     return false;
   }
 }
+__name(Authenticate, "Authenticate");
 function renderHomePage(proxySettings, hostName, isPassSet) {
   const {
     remoteDNS,
@@ -5490,11 +5620,11 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                 <details open>
                     <summary><h2>VLESS / TROJAN \u2699\uFE0F</h2></summary>
                     <div class="form-control">
-                        <label for="remoteDNS">\u{1F30F} Remote DNS</label>
+                        <label for="remoteDNS">\u{1F30F} \u8FDC\u7A0BDNS</label>
                         <input type="url" id="remoteDNS" name="remoteDNS" value="${remoteDNS}" required>
                     </div>
                     <div class="form-control">
-                        <label for="localDNS">\u{1F3DA}\uFE0F Local DNS</label>
+                        <label for="localDNS">\u{1F3DA}\uFE0F \u672C\u5730DNS</label>
                         <input type="text" id="localDNS" name="localDNS" value="${localDNS}"
                             pattern="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|localhost$"
                             title="Please enter a valid DNS IP Address or localhost!"  required>
@@ -5509,28 +5639,28 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                         </div>
                     </div>
                     <div class="form-control">
-                        <label for="proxyIP">\u{1F4CD} Proxy IP</label>
+                        <label for="proxyIP">\u{1F4CD} \u4EE3\u7406IP</label>
                         <input type="text" id="proxyIP" name="proxyIP" value="${proxyIP2}">
                     </div>
                     <div class="form-control">
-                        <label for="outProxy">\u2708\uFE0F Chain Proxy</label>
+                        <label for="outProxy">\u2708\uFE0F \u94FE\u5F0F\u4EE3\u7406</label>
                         <input type="text" id="outProxy" name="outProxy" value="${outProxy}">
                     </div>
                     <div class="form-control">
-                        <label for="cleanIPs">\u2728 Clean IPs</label>
+                        <label for="cleanIPs">\u2728 \u4F18\u9009IP</label>
                         <input type="text" id="cleanIPs" name="cleanIPs" value="${cleanIPs.replaceAll(",", " , ")}">
                     </div>
                     <div class="form-control">
-                        <label>\u{1F50E} IP Scanner</label>
+                        <label>\u{1F50E} IP \u626B\u63CF</label>
                         <a href="https://scanner.github1.cloud/" id="scanner" name="scanner" target="_blank" style="width: 100%;">
                             <button type="button" class="button">
-                                Scan now
+                                \u5F00\u59CB\u626B\u63CF
                                 <span class="material-symbols-outlined">open_in_new</span>
                             </button>
                         </a>
                     </div>
                     <div class="form-control">
-                        <label for="enableIPv6">\u{1F51B} IPv6 Configs</label>
+                        <label for="enableIPv6">\u{1F51B} IPv6 \u914D\u7F6E</label>
                         <div class="input-with-select">
                             <select id="enableIPv6" name="enableIPv6">
                                 <option value="true" ${enableIPv6 ? "selected" : ""}>Enabled</option>
@@ -5539,23 +5669,23 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                         </div>
                     </div>
                     <div class="form-control">
-                        <label for="customCdnAddrs">\u{1F480} Custom CDN Addrs</label>
+                        <label for="customCdnAddrs">\u{1F480} \u81EA\u5B9A\u4E49 CDN \u5730\u5740</label>
                         <input type="text" id="customCdnAddrs" name="customCdnAddrs" value="${customCdnAddrs.replaceAll(",", " , ")}">
                     </div>
                     <div class="form-control">
-                        <label for="customCdnHost">\u{1F480} Custom CDN Host</label> 
+                        <label for="customCdnHost">\u{1F480} \u81EA\u5B9A\u4E49 CDN \u4E3B\u673A</label> 
                         <input type="text" id="customCdnHost" name="customCdnHost" value="${customCdnHost}">
                     </div>
                     <div class="form-control">
-                        <label for="customCdnSni">\u{1F480} Custom CDN SNI</label>
+                        <label for="customCdnSni">\u{1F480} \u81EA\u5B9A\u4E49 CDN SNI</label>
                         <input type="text" id="customCdnSni" name="customCdnSni" value="${customCdnSni}">
                     </div>
                     <div class="form-control">
-                        <label for="bestVLESSTrojanInterval">\u{1F504} Best Interval</label>
+                        <label for="bestVLESSTrojanInterval">\u{1F504} \u6700\u4F73\u5EF6\u8FDF</label>
                         <input type="number" id="bestVLESSTrojanInterval" name="bestVLESSTrojanInterval" min="10" max="90" value="${bestVLESSTrojanInterval}">
                     </div>
                     <div class="form-control" style="padding-top: 10px;">
-                        <label>\u2699\uFE0F Protocols</label>
+                        <label>\u2699\uFE0F \u534F\u8BAE</label>
                         <div style="width: 100%; display: grid; grid-template-columns: 1fr 1fr; align-items: baseline; margin-top: 10px;">
                             <div style = "display: flex; justify-content: center; align-items: center;">
                                 <input type="checkbox" id="vlessConfigs" name="vlessConfigs" onchange="handleProtocolChange(event)" value="true" ${vlessConfigs ? "checked" : ""}>
@@ -5570,8 +5700,8 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                     <div class="table-container">
                         <table id="ports-block">
                             <tr>
-                                <th style="text-wrap: nowrap; background-color: gray;">Config type</th>
-                                <th style="text-wrap: nowrap; background-color: gray;">Ports</th>
+                                <th style="text-wrap: nowrap; background-color: gray;">\u914D\u7F6E\u7C7B\u578B</th>
+                                <th style="text-wrap: nowrap; background-color: gray;">\u7AEF\u53E3</th>
                             </tr>
                             <tr>
                                 <td style="text-align: center; font-size: larger;"><b>TLS</b></td>
@@ -5580,7 +5710,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                                 </td>    
                             </tr>
                             ${!httpPortsBlock ? "" : `<tr>
-                                <td style="text-align: center; font-size: larger;"><b>Non TLS</b></td>
+                                <td style="text-align: center; font-size: larger;"><b>\u975E TLS</b></td>
                                 <td>
                                     <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;">${httpPortsBlock}</div>
                                 </td>    
@@ -5624,34 +5754,34 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                 <details>
                     <summary><h2>WARP GENERAL \u2699\uFE0F</h2></summary>
                     <div class="form-control">
-                        <label for="warpEndpoints">\u2728 Endpoints</label>
+                        <label for="warpEndpoints">\u2728 \u7AEF\u70B9</label>
                         <input type="text" id="warpEndpoints" name="warpEndpoints" value="${warpEndpoints.replaceAll(",", " , ")}" required>
                     </div>
                     <div class="form-control">
-                        <label style="line-height: 1.5;">\u{1F50E} Scan Endpoint</label>
+                        <label style="line-height: 1.5;">\u{1F50E} \u626B\u63CF\u7AEF\u70B9</label>
                         <button type="button" class="button" style="padding: 10px 0;" onclick="copyToClipboard('bash <(curl -fsSL https://raw.githubusercontent.com/Ptechgithub/warp/main/endip/install.sh)', false)">
-                            Copy Script<span class="material-symbols-outlined">terminal</span>
+                            \u590D\u5236\u811A\u672C<span class="material-symbols-outlined">terminal</span>
                         </button>
                     </div>
                     <div class="form-control">
                         <label for="warpFakeDNS">\u{1F9E2} Fake DNS</label>
                         <div class="input-with-select">
                             <select id="warpFakeDNS" name="warpFakeDNS">
-                                <option value="true" ${warpFakeDNS ? "selected" : ""}>Enabled</option>
-                                <option value="false" ${!warpFakeDNS ? "selected" : ""}>Disabled</option>
+                                <option value="true" ${warpFakeDNS ? "selected" : ""}>\u542F\u7528</option>
+                                <option value="false" ${!warpFakeDNS ? "selected" : ""}>\u7981\u7528</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-control">
-                        <label for="warpPlusLicense">\u2795 Warp+ License</label>
+                        <label for="warpPlusLicense">\u2795 Warp+ \u8BB8\u53EF\u8BC1</label>
                         <input type="text" id="warpPlusLicense" name="warpPlusLicense" value="${warpPlusLicense}" 
                             pattern="^[a-zA-Z0-9]{8}-[a-zA-Z0-9]{8}-[a-zA-Z0-9]{8}$" 
                             title="Please enter a valid Warp Plus license in xxxxxxxx-xxxxxxxx-xxxxxxxx format">
                     </div>
                     <div class="form-control">
-                        <label>\u267B\uFE0F Warp Configs</label>
+                        <label>\u267B\uFE0F Warp \u914D\u7F6E</label>
                         <button id="refreshBtn" type="button" class="button" style="padding: 10px 0;" onclick="getWarpConfigs()">
-                            Update<span class="material-symbols-outlined">autorenew</span>
+                            \u66F4\u65B0<span class="material-symbols-outlined">autorenew</span>
                         </button>
                     </div>
                     <div class="form-control">
@@ -5662,14 +5792,14 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                 <details>
                     <summary><h2>WARP PRO \u2699\uFE0F</h2></summary>
                     <div class="form-control">
-                        <label for="hiddifyNoiseMode">\u{1F635}\u200D\u{1F4AB} Hiddify Mode</label>
+                        <label for="hiddifyNoiseMode">\u{1F635}\u200D\u{1F4AB} Hiddify \u6A21\u5F0F</label>
                         <input type="text" id="hiddifyNoiseMode" name="hiddifyNoiseMode" 
                             pattern="^(m[1-6]|h_[0-9A-Fa-f]{2}|g_([0-9A-Fa-f]{2}_){2}[0-9A-Fa-f]{2})$" 
                             title="Enter 'm1-m6', 'h_HEX', 'g_HEX_HEX_HEX' which HEX can be between 00 to ff"
                             value="${hiddifyNoiseMode}" required>
                     </div>
                     <div class="form-control">
-                        <label for="nikaNGNoiseMode">\u{1F635}\u200D\u{1F4AB} NikaNG Mode</label>
+                        <label for="nikaNGNoiseMode">\u{1F635}\u200D\u{1F4AB} NikaNG \u6A21\u5F0F</label>
                         <input type="text" id="nikaNGNoiseMode" name="nikaNGNoiseMode" 
                             pattern="^(none|quic|random|[0-9A-Fa-f]+)$" 
                             title="Enter 'none', 'quic', 'random', or any HEX string like 'ee0000000108aaaa'"
@@ -5707,41 +5837,41 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                     </div>
                 </details>
                 <details>
-                    <summary><h2>ROUTING RULES \u2699\uFE0F</h2></summary>
+                    <summary><h2>\u8DEF\u7531\u89C4\u5219 \u2699\uFE0F</h2></summary>
                     <div id="routing-rules" class="form-control" style="margin-bottom: 20px;">			
                         <div class="routing">
                             <input type="checkbox" id="bypass-lan" name="bypass-lan" value="true" ${bypassLAN ? "checked" : ""}>
-                            <label for="bypass-lan">Bypass LAN</label>
+                            <label for="bypass-lan">\u7ED5\u8FC7\u5C40\u57DF\u7F51</label>
                         </div>
                         <div class="routing">
                             <input type="checkbox" id="block-ads" name="block-ads" value="true" ${blockAds ? "checked" : ""}>
-                            <label for="block-ads">Block Ads.</label>
+                            <label for="block-ads">\u5C4F\u853D\u5E7F\u544A</label>
                         </div>
                         <div class="routing">
                             <input type="checkbox" id="bypass-iran" name="bypass-iran" value="true" ${bypassIran ? "checked" : ""}>
-                            <label for="bypass-iran">Bypass Iran</label>
+                            <label for="bypass-iran">\u7ED5\u8FC7\u4F0A\u6717</label>
                         </div>
                         <div class="routing">
                             <input type="checkbox" id="block-porn" name="block-porn" value="true" ${blockPorn ? "checked" : ""}>
-                            <label for="block-porn">Block Porn</label>
+                            <label for="block-porn">\u5C4F\u853D\u8272\u60C5\u5185\u5BB9</label>
                         </div>
                         <div class="routing">
                             <input type="checkbox" id="bypass-china" name="bypass-china" value="true" ${bypassChina ? "checked" : ""}>
-                            <label for="bypass-china">Bypass China</label>
+                            <label for="bypass-china">\u7ED5\u8FC7\u4E2D\u56FD</label>
                         </div>
                         <div class="routing">
                             <input type="checkbox" id="block-udp-443" name="block-udp-443" value="true" ${blockUDP443 ? "checked" : ""}>
-                            <label for="block-udp-443">Block QUIC</label>
+                            <label for="block-udp-443">\u963B\u6B62 QUIC</label>
                         </div>
                         <div class="routing">
                             <input type="checkbox" id="bypass-russia" name="bypass-russia" value="true" ${bypassRussia ? "checked" : ""}>
-                            <label for="bypass-russia">Bypass Russia</label>
+                            <label for="bypass-russia">\u7ED5\u8FC7\u4FC4\u7F57\u65AF</label>
                         </div>
                     </div>
                 </details>
                 <div id="apply" class="form-control">
                     <div style="grid-column: 2; width: 100%; display: inline-flex;">
-                        <input type="submit" id="applyButton" style="margin-right: 10px;" class="button disabled" value="APPLY SETTINGS \u{1F4A5}" form="configForm">
+                        <input type="submit" id="applyButton" style="margin-right: 10px;" class="button disabled" value="\u5E94\u7528\u8BBE\u7F6E \u{1F4A5}" form="configForm">
                         <button type="button" id="resetSettings" style="background: none; margin: 0; border: none; cursor: pointer;">
                             <i class="fa fa-refresh fa-2x fa-border" style="border-radius: .2em; border-color: var(--border-color);" aria-hidden="true"></i>
                         </button>
@@ -5749,12 +5879,12 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                 </div>
             </form>
             <hr>            
-            <h2>NORMAL SUB \u{1F517}</h2>
+            <h2>\u4E00\u822C\u8BA2\u9605 \u{1F517}</h2>
             <div class="table-container">
                 <table id="normal-configs-table">
                     <tr>
-                        <th>Application</th>
-                        <th>Subscription</th>
+                        <th>\u5E94\u7528</th>
+                        <th>\u8BA2\u9605</th>
                     </tr>
                     <tr>
                         <td>
@@ -5796,11 +5926,11 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                             </div>
                         </td>
                         <td>
-                            <button onclick="openQR('https://${hostName}/sub/${userID}#BPB-Normal', 'Normal Subscription')" style="margin-bottom: 8px;">
-                                QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
+                            <button onclick="openQR('https://${hostName}/sub/${userID}#BPB-Normal', '\u4E00\u822C\u8BA2\u9605')" style="margin-bottom: 8px;">
+                                \u4E8C\u7EF4\u7801&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
                             <button onclick="copyToClipboard('https://${hostName}/sub/${userID}#BPB-Normal', false)">
-                                Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
+                                \u590D\u5236\u8BA2\u9605<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
                     </tr>
@@ -5821,7 +5951,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                         </td>
                         <td>
                             <button onclick="copyToClipboard('https://${hostName}/sub/${userID}?app=singbox#BPB-Normal', false)">
-                                Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
+                                \u590D\u5236\u8BA2\u9605<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
                     </tr>
@@ -5831,8 +5961,8 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
             <div class="table-container">
                 <table id="full-normal-configs-table">
                     <tr>
-                        <th>Application</th>
-                        <th>Subscription</th>
+                        <th>\u5E94\u7528</th>
+                        <th>\u8BA2\u9605</th>
                     </tr>
                     <tr>
                         <td>
@@ -5863,10 +5993,10 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                         </td>
                         <td>
                             <button onclick="openQR('https://${hostName}/sub/${userID}?app=xray#BPB-Full-Normal', 'Full normal Subscription')" style="margin-bottom: 8px;">
-                                QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
+                                \u4E8C\u7EF4\u7801&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
                             <button onclick="copyToClipboard('https://${hostName}/sub/${userID}?app=xray#BPB-Full-Normal', false)">
-                                Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
+                                \u590D\u5236\u8BA2\u9605<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
                     </tr>
@@ -5879,10 +6009,10 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                         </td>
                         <td>
                             <button onclick="openQR('sing-box://import-remote-profile?url=https://${hostName}/sub/${userID}?app=sfa#BPB-Full-Normal', 'Normal Subscription')" style="margin-bottom: 8px;">
-                                QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
+                                \u4E8C\u7EF4\u7801&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
                             <button onclick="copyToClipboard('https://${hostName}/sub/${userID}?app=sfa#BPB-Full-Normal', false)">
-                                Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
+                                \u590D\u5236\u8BA2\u9605<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
                     </tr>
@@ -5911,21 +6041,21 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                         </td>
                         <td>
                             <button onclick="openQR('https://${hostName}/sub/${userID}?app=clash#BPB-Full-Normal', 'Normal Subscription')" style="margin-bottom: 8px;">
-                                QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
+                                \u4E8C\u7EF4\u7801&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
                             <button onclick="copyToClipboard('https://${hostName}/sub/${userID}?app=clash#BPB-Full-Normal', false)">
-                                Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
+                                \u590D\u5236\u8BA2\u9605<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
                     </tr>
                 </table>
             </div>
-            <h2>FRAGMENT SUB \u26D3\uFE0F</h2>
+            <h2>FRAGMENT\u8BA2\u9605 \u26D3\uFE0F</h2>
             <div class="table-container">
                 <table id="frag-sub-table">
                     <tr>
-                        <th style="text-wrap: nowrap;">Application</th>
-                        <th style="text-wrap: nowrap;">Subscription</th>
+                        <th style="text-wrap: nowrap;">\u5E94\u7528</th>
+                        <th style="text-wrap: nowrap;">\u8BA2\u9605</th>
                     </tr>
                     <tr>
                         <td style="text-wrap: nowrap;">
@@ -5955,11 +6085,11 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                             </div>
                         </td>
                         <td>
-                            <button onclick="openQR('https://${hostName}/fragsub/${userID}#BPB-Fragment', 'Fragment Subscription')" style="margin-bottom: 8px;">
-                                QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
+                            <button onclick="openQR('https://${hostName}/fragsub/${userID}#BPB-Fragment', '\u7247\u6BB5\u8BA2\u9605')" style="margin-bottom: 8px;">
+                                \u4E8C\u7EF4\u7801&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
                             <button onclick="copyToClipboard('https://${hostName}/fragsub/${userID}#BPB-Fragment', true)">
-                                Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
+                                \u590D\u5236\u8BA2\u9605<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
                     </tr>
@@ -5971,22 +6101,22 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                             </div>
                         </td>
                         <td>
-                            <button onclick="openQR('https://${hostName}/fragsub/${userID}?app=hiddify#BPB-Fragment', 'Fragment Subscription')" style="margin-bottom: 8px;">
-                                QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
+                            <button onclick="openQR('https://${hostName}/fragsub/${userID}?app=hiddify#BPB-Fragment', '\u7247\u6BB5\u8BA2\u9605')" style="margin-bottom: 8px;">
+                                \u4E8C\u7EF4\u7801&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
                             <button onclick="copyToClipboard('https://${hostName}/fragsub/${userID}?app=hiddify#BPB-Fragment', true)">
-                                Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
+                                \u590D\u5236\u8BA2\u9605<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
                     </tr>
                 </table>
             </div>
-            <h2>WARP SUB \u{1F517}</h2>
+            <h2>WARP \u8BA2\u9605 \u{1F517}</h2>
             <div class="table-container">
                 <table id="normal-configs-table">
                     <tr>
-                        <th>Application</th>
-                        <th>Subscription</th>
+                        <th>\u5E94\u7528</th>
+                        <th>\u8BA2\u9605</th>
                     </tr>
                     <tr>
                         <td>
@@ -6005,10 +6135,10 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                         </td>
                         <td>
                             <button onclick="openQR('https://${hostName}/warpsub/${userID}?app=xray#BPB-Warp', 'Warp Subscription')" style="margin-bottom: 8px;">
-                                QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
+                                \u4E8C\u7EF4\u7801&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
                             <button onclick="copyToClipboard('https://${hostName}/warpsub/${userID}?app=xray#BPB-Warp', false)">
-                                Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
+                                \u590D\u5236\u8BA2\u9605<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
                     </tr>
@@ -6025,10 +6155,10 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                         </td>
                         <td>
                             <button onclick="openQR('sing-box://import-remote-profile?url=https://${hostName}/warpsub/${userID}?app=singbox#BPB-Warp', 'Warp Subscription')" style="margin-bottom: 8px;">
-                                QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
+                                \u4E8C\u7EF4\u7801&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
                             <button onclick="copyToClipboard('https://${hostName}/warpsub/${userID}?app=singbox#BPB-Warp', false)">
-                                Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
+                                \u590D\u5236\u8BA2\u9605<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
                     </tr>
@@ -6057,16 +6187,16 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                         </td>
                         <td>
                             <button onclick="openQR('https://${hostName}/warpsub/${userID}?app=clash#BPB-Warp', 'Warp Subscription')" style="margin-bottom: 8px;">
-                                QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
+                                \u4E8C\u7EF4\u7801&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
                             <button onclick="copyToClipboard('https://${hostName}/warpsub/${userID}?app=clash#BPB-Warp', false)">
-                                Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
+                                \u590D\u5236\u8BA2\u9605<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
                     </tr>
                 </table>
             </div>
-            <h2>WARP PRO SUB \u{1F517}</h2>
+            <h2>WARP PRO \u8BA2\u9605 \u{1F517}</h2>
             <div class="table-container">
                 <table id="warp-pro-configs-table">
                     <tr>
@@ -6089,11 +6219,11 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                             </div>
                         </td>
                         <td>
-                            <button onclick="openQR('https://${hostName}/warpsub/${userID}?app=nikang#BPB-Warp-Pro', 'Warp Pro Subscription')" style="margin-bottom: 8px;">
-                                QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
+                            <button onclick="openQR('https://${hostName}/warpsub/${userID}?app=nikang#BPB-Warp-Pro', 'WARP PRO \u8BA2\u9605')" style="margin-bottom: 8px;">
+                                \u4E8C\u7EF4\u7801&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
                             <button onclick="copyToClipboard('https://${hostName}/warpsub/${userID}?app=nikang#BPB-Warp-Pro', false)">
-                                Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
+                                \u590D\u5236\u8BA2\u9605<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
                     </tr>
@@ -6105,11 +6235,11 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                             </div>
                         </td>
                         <td>
-                            <button onclick="openQR('sing-box://import-remote-profile?url=https://${hostName}/warpsub/${userID}?app=hiddify#BPB-Warp-Pro', 'Warp Pro Subscription')" style="margin-bottom: 8px;">
-                                QR Code&nbsp;<span class="material-symbols-outlined">qr_code</span>
+                            <button onclick="openQR('sing-box://import-remote-profile?url=https://${hostName}/warpsub/${userID}?app=hiddify#BPB-Warp-Pro', 'WARP PRO \u8BA2\u9605')" style="margin-bottom: 8px;">
+                                \u4E8C\u7EF4\u7801&nbsp;<span class="material-symbols-outlined">qr_code</span>
                             </button>
                             <button onclick="copyToClipboard('https://${hostName}/warpsub/${userID}?app=hiddify#BPB-Warp-Pro', false)">
-                                Copy Sub<span class="material-symbols-outlined">format_list_bulleted</span>
+                                \u590D\u5236\u8BA2\u9605<span class="material-symbols-outlined">format_list_bulleted</span>
                             </button>
                         </td>
                     </tr>
@@ -6119,17 +6249,17 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                 <div class="modal-content">
                     <span class="close">&times;</span>
                     <form id="passwordChangeForm">
-                        <h2>Change Password</h2>
+                        <h2>\u4FEE\u6539\u5BC6\u7801</h2>
                         <div class="form-control">
-                            <label for="newPassword">New Password</label>
+                            <label for="newPassword">\u65B0\u5BC6\u7801</label>
                             <input type="password" id="newPassword" name="newPassword" required>
                             </div>
                         <div class="form-control">
-                            <label for="confirmPassword">Confirm Password</label>
+                            <label for="confirmPassword">\u786E\u8BA4\u5BC6\u7801</label>
                             <input type="password" id="confirmPassword" name="confirmPassword" required>
                         </div>
                         <div id="passwordError" style="color: red; margin-bottom: 10px;"></div>
-                        <button id="changePasswordBtn" type="submit" class="button">Change Password</button>
+                        <button id="changePasswordBtn" type="submit" class="button">\u4FEE\u6539\u5BC6\u7801</button>
                     </form>
                 </div>
             </div>
@@ -6146,7 +6276,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
             <div class="footer">
                 <i class="fa fa-github" style="font-size:36px; margin-right: 10px;"></i>
                 <a class="link" href="https://github.com/bia-pain-bache/BPB-Worker-Panel" style="color: var(--color); text-decoration: underline;" target="_blank">Github</a>
-                <button id="openModalBtn" class="button">Change Password</button>
+                <button id="openModalBtn" class="button">\u4FEE\u6539\u5BC6\u7801</button>
                 <button type="button" id="logout" style="background: none; color: var(--color); margin: 0; border: none; cursor: pointer;">
                     <i class="fa fa-power-off fa-2x" aria-hidden="true"></i>
                 </button>
@@ -6244,12 +6374,12 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                     document.body.style.cursor = 'default';
                     refreshBtn.innerHTML = refreshButtonVal;
                     if (response.ok) {
-                        alert('\u2705 Panel settings reset to default successfully! \u{1F60E}');
+                        alert('\u2705 \u9762\u677F\u8BBE\u7F6E\u5DF2\u6062\u590D\u9ED8\u8BA4! \u{1F60E}');
                         window.location.reload(true);
                     } else {
                         const errorMessage = await response.text();
                         console.error(errorMessage, response.status);
-                        alert('\u26A0\uFE0F An error occured, Please try again!\\n\u26D4 ' + errorMessage);
+                        alert('\u26A0\uFE0F \u53D1\u751F\u9519\u8BEF, \u8BF7\u91CD\u8BD5!\\n\u26D4 ' + errorMessage);
                     }         
                 } catch (error) {
                     console.error('Error:', error);
@@ -6289,7 +6419,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
             try {
                 document.body.style.cursor = 'wait';
                 const refreshButtonVal = refreshBtn.innerHTML;
-                refreshBtn.innerHTML = '\u231B Loading...';
+                refreshBtn.innerHTML = '\u231B \u52A0\u8F7D\u4E2D...';
 
                 const response = await fetch('/update-warp', {
                     method: 'POST',
@@ -6299,11 +6429,11 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                 document.body.style.cursor = 'default';
                 refreshBtn.innerHTML = refreshButtonVal;
                 if (response.ok) {
-                    ${isWarpPlus} ? alert('\u2705 Warp configs upgraded to PLUS successfully! \u{1F60E}') : alert('\u2705 Warp configs updated successfully! \u{1F60E}');
+                    ${isWarpPlus} ? alert('\u2705 Warp \u914D\u7F6E\u66F4\u65B0\u5230 PLUS \u6210\u529F! \u{1F60E}') : alert('\u2705 Warp \u914D\u7F6E\u66F4\u65B0\u6210\u529F! \u{1F60E}');
                 } else {
                     const errorMessage = await response.text();
                     console.error(errorMessage, response.status);
-                    alert('\u26A0\uFE0F An error occured, Please try again!\\n\u26D4 ' + errorMessage);
+                    alert('\u26A0\uFE0F \u53D1\u751F\u9519\u8BEF, \u8BF7\u91CD\u8BD5!\\n\u26D4 ' + errorMessage);
                 }         
             } catch (error) {
                 console.error('Error:', error);
@@ -6323,7 +6453,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
             if (activePortsNo === 0) {
                 event.preventDefault();
                 event.target.checked = !event.target.checked;
-                alert("\u26D4 At least one port should be selected! \u{1FAE4}");
+                alert("\u26D4 \u8BF7\u81F3\u5C11\u9009\u62E9\u4E00\u4E2A\u7AEF\u53E3! \u{1FAE4}");
                 activePortsNo = 1;
                 defaultHttpsPorts.includes(event.target.name) && activeHttpsPortsNo++;
                 return false;
@@ -6332,7 +6462,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
             if (activeHttpsPortsNo === 0) {
                 event.preventDefault();
                 event.target.checked = !event.target.checked;
-                alert("\u26D4 At least one TLS(https) port should be selected! \u{1FAE4}");
+                alert("\u26D4 \u8BF7\u81F3\u5C11\u9009\u62E9\u4E00\u4E2A TLS(https) \u7AEF\u53E3! \u{1FAE4}");
                 activeHttpsPortsNo = 1;
                 return false;
             }
@@ -6349,7 +6479,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
             if (activeProtocols === 0) {
                 event.preventDefault();
                 event.target.checked = !event.target.checked;
-                alert("\u26D4 At least one Protocol should be selected! \u{1FAE4}");
+                alert("\u26D4 \u8BF7\u81F3\u5C11\u9009\u62E9\u4E00\u4E2A\u534F\u8BAE! \u{1FAE4}");
                 activeProtocols = 1;
                 return false;
             }
@@ -6384,7 +6514,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
             textarea.select();
             document.execCommand('copy');
             document.body.removeChild(textarea);
-            alert('\u{1F4CB} Copied to clipboard:\\n\\n' +  value);
+            alert('\u{1F4CB} \u590D\u5236\u5230\u526A\u5207\u677F:\\n\\n' +  value);
         }
 
         const applySettings = async (event, configForm) => {
@@ -6445,7 +6575,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
             });
 
             if (invalidIPs.length) {
-                alert('\u26D4 Invalid IPs or Domains \u{1FAE4}\\n\\n' + invalidIPs.map(ip => '\u26A0\uFE0F ' + ip).join('\\n'));
+                alert('\u26D4 \u65E0\u6548IP\u6216\u57DF\u540D \u{1FAE4}\\n\\n' + invalidIPs.map(ip => '\u26A0\uFE0F ' + ip).join('\\n'));
                 return false;
             }
             
@@ -6460,12 +6590,12 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
             }
 
             if (!(isVless && (hasSecurity && validSecurityType || !hasSecurity) && validTransmission) && !isSocksHttp && chainProxy) {
-                alert('\u26D4 Invalid Config! \u{1FAE4} \\n - The chain proxy should be VLESS, Socks or Http!\\n - VLESS transmission should be GRPC,WS or TCP\\n - VLESS security should be TLS,Reality or None\\n - socks or http should be like:\\n + (socks or http)://user:pass@host:port\\n + (socks or http)://host:port');               
+                alert('\u26D4 \u65E0\u6548\u914D\u7F6E! \u{1FAE4} \\n - The chain proxy should be VLESS, Socks or Http!\\n - VLESS transmission should be GRPC,WS or TCP\\n - VLESS security should be TLS,Reality or None\\n - socks or http should be like:\\n + (socks or http)://user:pass@host:port\\n + (socks or http)://host:port');               
                 return false;
             }
 
             if (isVless && securityType === 'tls' && vlessPort !== '443') {
-                alert('\u26D4 VLESS TLS port can be only 443 to be used as a proxy chain! \u{1FAE4}');               
+                alert('\u26D4 VLESS TLS \u7AEF\u53E3\u53EA\u80FD\u4E3A 443 (\u4F5C\u4E3A\u4EE3\u7406\u94FE)! \u{1FAE4}');               
                 return false;
             }
 
@@ -6477,7 +6607,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
             try {
                 document.body.style.cursor = 'wait';
                 const applyButtonVal = applyButton.value;
-                applyButton.value = '\u231B Loading...';
+                applyButton.value = '\u231B \u52A0\u8F7D\u4E2D...';
 
                 const response = await fetch('/panel', {
                     method: 'POST',
@@ -6489,12 +6619,12 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                 applyButton.value = applyButtonVal;
 
                 if (response.ok) {
-                    alert('\u2705 Parameters applied successfully \u{1F60E}');
+                    alert('\u2705 \u53C2\u6570\u5E94\u7528\u6210\u529F \u{1F60E}');
                     window.location.reload(true);
                 } else {
                     const errorMessage = await response.text();
                     console.error(errorMessage, response.status);
-                    alert('\u26A0\uFE0F Session expired! Please login again.');
+                    alert('\u26A0\uFE0F \u4F1A\u8BDD\u8D85\u65F6! \u8BF7\u91CD\u65B0\u767B\u5F55.');
                     window.location.href = '/login';
                 }           
             } catch (error) {
@@ -6540,7 +6670,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
             const isLongEnough = newPassword.length >= 8;
 
             if (!(hasCapitalLetter && hasNumber && isLongEnough)) {
-                passwordError.textContent = '\u26A0\uFE0F Password must contain at least one capital letter, one number, and be at least 8 characters long.';
+                passwordError.textContent = '\u26A0\uFE0F \u5BC6\u7801\u5FC5\u987B\u81F3\u5C11\u5305\u542B\u4E00\u4E2A\u5927\u5199\u5B57\u6BCD\u3001\u4E00\u4E2A\u6570\u5B57\uFF0C\u4E14\u957F\u5EA6\u81F3\u5C11\u4E3A 8 \u4E2A\u5B57\u7B26.';
                 return false;
             }
                     
@@ -6557,13 +6687,13 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
                 if (response.ok) {
                     modal.style.display = "none";
                     document.body.style.overflow = "";
-                    alert("\u2705 Password changed successfully! \u{1F44D}");
+                    alert("\u2705 \u5BC6\u7801\u4FEE\u6539\u6210\u529F! \u{1F44D}");
                     window.location.href = '/login';
                 } else if (response.status === 401) {
                     const errorMessage = await response.text();
                     passwordError.textContent = '\u26A0\uFE0F ' + errorMessage;
                     console.error(errorMessage, response.status);
-                    alert('\u26A0\uFE0F Session expired! Please login again.');
+                    alert('\u26A0\uFE0F \u4F1A\u8BDD\u5DF2\u8FC7\u671F\uFF01\u8BF7\u91CD\u65B0\u767B\u5F55.');
                     window.location.href = '/login';
                 } else {
                     const errorMessage = await response.text();
@@ -6580,6 +6710,7 @@ function renderHomePage(proxySettings, hostName, isPassSet) {
     </html>`;
   return html;
 }
+__name(renderHomePage, "renderHomePage");
 function renderLoginPage() {
   return `
     <!DOCTYPE html>
@@ -6587,7 +6718,7 @@ function renderLoginPage() {
     <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Login</title>
+    <title>\u7528\u6237\u767B\u5F55</title>
     <style>
         :root {
             --color: black;
@@ -6714,18 +6845,19 @@ function renderLoginPage() {
                 if (response.ok) {
                     window.location.href = '/panel';
                 } else {
-                    passwordError.textContent = '\u26A0\uFE0F Wrong Password!';
+                    passwordError.textContent = '\u26A0\uFE0F \u5BC6\u7801\u9519\u8BEF!';
                     const errorMessage = await response.text();
-                    console.error('Login failed:', errorMessage);
+                    console.error('\u767B\u5F55\u5931\u8D25:', errorMessage);
                 }
             } catch (error) {
-                console.error('Error during login:', error);
+                console.error('\u767B\u5F55\u65F6\u51FA\u9519:', error);
             }
         });
     <\/script>
     </body>
     </html>`;
 }
+__name(renderLoginPage, "renderLoginPage");
 function renderErrorPage(message2, error, refer) {
   return `
     <!DOCTYPE html>
@@ -6733,7 +6865,7 @@ function renderErrorPage(message2, error, refer) {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Error Page</title>
+        <title>\u9519\u8BEF\u9875\u9762</title>
         <style>
             :root {
                 --color: black;
@@ -6767,7 +6899,7 @@ function renderErrorPage(message2, error, refer) {
         <div id="error-container">
             <h1>BPB Panel <span style="font-size: smaller;">${panelVersion}</span> \u{1F4A6}</h1>
             <div id="error-message">
-                <h2>${message2} ${refer ? 'Please try again or refer to <a href="https://github.com/bia-pain-bache/BPB-Worker-Panel/blob/main/README.md">documents</a>' : ""}
+                <h2>${message2} ${refer ? '\u8BF7\u91CD\u8BD5\u6216\u53C2\u8003 <a href="https://github.com/bia-pain-bache/BPB-Worker-Panel/blob/main/README.md">documents</a>' : ""}
                 </h2>
                 <p><b>${error ? `\u26A0\uFE0F ${error.stack.toString()}` : ""}</b></p>
             </div>
@@ -6778,6 +6910,7 @@ function renderErrorPage(message2, error, refer) {
     </body>
     </html>`;
 }
+__name(renderErrorPage, "renderErrorPage");
 function extractChainProxyParams(chainProxy) {
   let configParams = {};
   if (!chainProxy)
@@ -6806,6 +6939,7 @@ function extractChainProxyParams(chainProxy) {
   }
   return JSON.stringify(configParams);
 }
+__name(extractChainProxyParams, "extractChainProxyParams");
 async function fetchWgConfig(env, proxySettings) {
   let warpConfigs = [];
   const apiBaseUrl = "https://api.cloudflareclient.com/v0a4005/reg";
@@ -6863,6 +6997,7 @@ async function fetchWgConfig(env, proxySettings) {
   await env.bpb.put("warpConfigs", configs);
   return { error: null, configs };
 }
+__name(fetchWgConfig, "fetchWgConfig");
 function extractWireguardParams(warpConfigs, isWoW) {
   const index = isWoW ? 1 : 0;
   const warpConfig = warpConfigs[index].account.config;
@@ -6873,6 +7008,7 @@ function extractWireguardParams(warpConfigs, isWoW) {
     privateKey: warpConfigs[index].privateKey
   };
 }
+__name(extractWireguardParams, "extractWireguardParams");
 async function buildXrayDNS(proxySettings, outboundAddrs, domainToStaticIPs, isWorkerLess, isWarp) {
   const {
     remoteDNS,
@@ -6955,6 +7091,7 @@ async function buildXrayDNS(proxySettings, outboundAddrs, domainToStaticIPs, isW
   }
   return dnsObject;
 }
+__name(buildXrayDNS, "buildXrayDNS");
 function buildXrayRoutingRules(proxySettings, outboundAddrs, isChain, isBalancer, isWorkerLess) {
   const {
     localDNS,
@@ -7042,6 +7179,7 @@ function buildXrayRoutingRules(proxySettings, outboundAddrs, isChain, isBalancer
   }
   return rules;
 }
+__name(buildXrayRoutingRules, "buildXrayRoutingRules");
 function buildXrayVLESSOutbound(tag2, address, port, host, sni, proxyIP2, isFragment, allowInsecure) {
   let outbound = {
     protocol: "vless",
@@ -7091,6 +7229,7 @@ function buildXrayVLESSOutbound(tag2, address, port, host, sni, proxyIP2, isFrag
   }
   return outbound;
 }
+__name(buildXrayVLESSOutbound, "buildXrayVLESSOutbound");
 function buildXrayTrojanOutbound(tag2, address, port, host, sni, proxyIP2, isFragment, allowInsecure) {
   let outbound = {
     protocol: "trojan",
@@ -7134,6 +7273,7 @@ function buildXrayTrojanOutbound(tag2, address, port, host, sni, proxyIP2, isFra
   }
   return outbound;
 }
+__name(buildXrayTrojanOutbound, "buildXrayTrojanOutbound");
 function buildXrayWarpOutbound(proxySettings, warpConfigs, endpoint, isChain, client) {
   const {
     nikaNGNoiseMode,
@@ -7186,6 +7326,7 @@ function buildXrayWarpOutbound(proxySettings, warpConfigs, endpoint, isChain, cl
   });
   return outbound;
 }
+__name(buildXrayWarpOutbound, "buildXrayWarpOutbound");
 function buildXrayChainOutbound(chainProxyParams) {
   if (["socks", "http"].includes(chainProxyParams.protocol)) {
     const { protocol, host: host2, port: port2, user, pass } = chainProxyParams;
@@ -7338,6 +7479,7 @@ function buildXrayChainOutbound(chainProxyParams) {
   }
   return proxyOutbound;
 }
+__name(buildXrayChainOutbound, "buildXrayChainOutbound");
 function buildXrayConfig(proxySettings, remark, isFragment, isBalancer, isChain, balancerFallback, isWarp) {
   const {
     vlessTrojanFakeDNS,
@@ -7380,6 +7522,7 @@ function buildXrayConfig(proxySettings, remark, isFragment, isBalancer, isChain,
   }
   return config;
 }
+__name(buildXrayConfig, "buildXrayConfig");
 async function buildXrayBestPingConfig(proxySettings, totalAddresses, chainProxy, outbounds, isFragment) {
   const remark = isFragment ? "\u{1F4A6} BPB F - Best Ping \u{1F4A5}" : "\u{1F4A6} BPB - Best Ping \u{1F4A5}";
   let config = buildXrayConfig(proxySettings, remark, isFragment, true, chainProxy, chainProxy ? "chain-2" : "prox-2");
@@ -7388,6 +7531,7 @@ async function buildXrayBestPingConfig(proxySettings, totalAddresses, chainProxy
   config.outbounds.unshift(...outbounds);
   return config;
 }
+__name(buildXrayBestPingConfig, "buildXrayBestPingConfig");
 async function buildXrayBestFragmentConfig(proxySettings, hostName, chainProxy, outbounds) {
   const bestFragValues = [
     "10-20",
@@ -7433,6 +7577,7 @@ async function buildXrayBestFragmentConfig(proxySettings, hostName, chainProxy, 
   config.outbounds.unshift(...bestFragOutbounds);
   return config;
 }
+__name(buildXrayBestFragmentConfig, "buildXrayBestFragmentConfig");
 async function buildXrayWorkerLessConfig(proxySettings) {
   let config = buildXrayConfig(proxySettings, "\u{1F4A6} BPB F - WorkerLess \u2B50", true, false, false, void 0, false);
   config.dns = await buildXrayDNS(proxySettings, [], void 0, true);
@@ -7443,6 +7588,7 @@ async function buildXrayWorkerLessConfig(proxySettings) {
   config.outbounds.push(fakeOutbound);
   return config;
 }
+__name(buildXrayWorkerLessConfig, "buildXrayWorkerLessConfig");
 async function getXrayCustomConfigs(env, proxySettings, hostName, isFragment) {
   let configs = [];
   let outbounds = [];
@@ -7519,6 +7665,7 @@ async function getXrayCustomConfigs(env, proxySettings, hostName, isFragment) {
   configs.push(bestPing, bestFragment, workerLessConfig);
   return configs;
 }
+__name(getXrayCustomConfigs, "getXrayCustomConfigs");
 async function getXrayWarpConfigs(proxySettings, warpConfigs, client) {
   let xrayWarpConfigs = [];
   let xrayWoWConfigs = [];
@@ -7561,6 +7708,7 @@ async function getXrayWarpConfigs(proxySettings, warpConfigs, client) {
   xrayWoWBestPing.outbounds.unshift(...xrayWoWOutbounds, ...xrayWarpOutbounds);
   return [...xrayWarpConfigs, ...xrayWoWConfigs, xrayWarpBestPing, xrayWoWBestPing];
 }
+__name(getXrayWarpConfigs, "getXrayWarpConfigs");
 async function buildClashDNS(proxySettings, isWarp) {
   const {
     remoteDNS,
@@ -7606,6 +7754,7 @@ async function buildClashDNS(proxySettings, isWarp) {
   }
   return dns;
 }
+__name(buildClashDNS, "buildClashDNS");
 function buildClashRoutingRules(proxySettings) {
   let rules = [];
   const {
@@ -7633,6 +7782,7 @@ function buildClashRoutingRules(proxySettings) {
   rules.push("MATCH,\u2705 Selector");
   return rules;
 }
+__name(buildClashRoutingRules, "buildClashRoutingRules");
 function buildClashVLESSOutbound(remark, address, port, host, sni, path, allowInsecure) {
   const tls = defaultHttpsPorts.includes(port) ? true : false;
   const addr = isIPv6(address) ? address.replace(/\[|\]/g, "") : address;
@@ -7662,6 +7812,7 @@ function buildClashVLESSOutbound(remark, address, port, host, sni, path, allowIn
   }
   return outbound;
 }
+__name(buildClashVLESSOutbound, "buildClashVLESSOutbound");
 function buildClashTrojanOutbound(remark, address, port, host, sni, path, allowInsecure) {
   const addr = isIPv6(address) ? address.replace(/\[|\]/g, "") : address;
   return {
@@ -7684,6 +7835,7 @@ function buildClashTrojanOutbound(remark, address, port, host, sni, path, allowI
     "skip-cert-verify": allowInsecure
   };
 }
+__name(buildClashTrojanOutbound, "buildClashTrojanOutbound");
 function buildClashWarpOutbound(warpConfigs, remark, endpoint, chain) {
   const ipv6Regex = /\[(.*?)\]/;
   const portRegex = /[^:]*$/;
@@ -7713,6 +7865,7 @@ function buildClashWarpOutbound(warpConfigs, remark, endpoint, chain) {
     "dns": ["1.1.1.1", "1.0.0.1"]
   };
 }
+__name(buildClashWarpOutbound, "buildClashWarpOutbound");
 function buildClashChainOutbound(chainProxyParams) {
   if (["socks", "http"].includes(chainProxyParams.protocol)) {
     const { protocol, host: host2, port: port2, user, pass } = chainProxyParams;
@@ -7787,6 +7940,7 @@ function buildClashChainOutbound(chainProxyParams) {
     };
   return chainOutbound;
 }
+__name(buildClashChainOutbound, "buildClashChainOutbound");
 async function getClashWarpConfig(proxySettings, warpConfigs) {
   const { warpEndpoints } = proxySettings;
   let config = structuredClone(clashConfigTemp);
@@ -7815,6 +7969,7 @@ async function getClashWarpConfig(proxySettings, warpConfigs) {
   selector.proxies.push(...warpRemarks, ...WoWRemarks);
   return config;
 }
+__name(getClashWarpConfig, "getClashWarpConfig");
 async function getClashNormalConfig(env, proxySettings, hostName) {
   let chainProxy;
   const {
@@ -7914,6 +8069,7 @@ async function getClashNormalConfig(env, proxySettings, hostName) {
   });
   return config;
 }
+__name(getClashNormalConfig, "getClashNormalConfig");
 function buildSingBoxDNS(proxySettings, isChain, isWarp) {
   const {
     remoteDNS,
@@ -7997,6 +8153,7 @@ function buildSingBoxDNS(proxySettings, isChain, isWarp) {
   }
   return { servers, rules, fakeip };
 }
+__name(buildSingBoxDNS, "buildSingBoxDNS");
 function buildSingBoxRoutingRules(proxySettings) {
   const {
     bypassLAN,
@@ -8169,6 +8326,7 @@ function buildSingBoxRoutingRules(proxySettings) {
   });
   return { rules, rule_set: ruleSet };
 }
+__name(buildSingBoxRoutingRules, "buildSingBoxRoutingRules");
 function buildSingBoxVLESSOutbound(proxySettings, remark, address, port, host, sni, allowInsecure, isFragment) {
   const { lengthMin, lengthMax, intervalMin, intervalMax, proxyIP: proxyIP2 } = proxySettings;
   const path = `/${getRandomPath(16)}${proxyIP2 ? `/${btoa(proxyIP2)}` : ""}`;
@@ -8209,6 +8367,7 @@ function buildSingBoxVLESSOutbound(proxySettings, remark, address, port, host, s
     };
   return outbound;
 }
+__name(buildSingBoxVLESSOutbound, "buildSingBoxVLESSOutbound");
 function buildSingBoxTrojanOutbound(proxySettings, remark, address, port, host, sni, allowInsecure, isFragment) {
   const { lengthMin, lengthMax, intervalMin, intervalMax, proxyIP: proxyIP2 } = proxySettings;
   const path = `/tr${getRandomPath(16)}${proxyIP2 ? `/${btoa(proxyIP2)}` : ""}`;
@@ -8249,6 +8408,7 @@ function buildSingBoxTrojanOutbound(proxySettings, remark, address, port, host, 
     };
   return outbound;
 }
+__name(buildSingBoxTrojanOutbound, "buildSingBoxTrojanOutbound");
 function buildSingBoxWarpOutbound(proxySettings, warpConfigs, remark, endpoint, chain, client) {
   const ipv6Regex = /\[(.*?)\]/;
   const portRegex = /[^:]*$/;
@@ -8292,6 +8452,7 @@ function buildSingBoxWarpOutbound(proxySettings, warpConfigs, remark, endpoint, 
   });
   return outbound;
 }
+__name(buildSingBoxWarpOutbound, "buildSingBoxWarpOutbound");
 function buildSingBoxChainOutbound(chainProxyParams) {
   if (["socks", "http"].includes(chainProxyParams.protocol)) {
     const { protocol, host: host2, port: port2, user, pass } = chainProxyParams;
@@ -8373,6 +8534,7 @@ function buildSingBoxChainOutbound(chainProxyParams) {
     };
   return chainOutbound;
 }
+__name(buildSingBoxChainOutbound, "buildSingBoxChainOutbound");
 async function getSingBoxWarpConfig(proxySettings, warpConfigs, client) {
   const { warpEndpoints } = proxySettings;
   let config = structuredClone(singboxConfigTemp);
@@ -8409,6 +8571,7 @@ async function getSingBoxWarpConfig(proxySettings, warpConfigs, client) {
   selector.outbounds.push(...warpRemarks, ...WoWRemarks);
   return config;
 }
+__name(getSingBoxWarpConfig, "getSingBoxWarpConfig");
 async function getSingBoxCustomConfig(env, proxySettings, hostName, client, isFragment) {
   let chainProxyOutbound;
   const {
@@ -8513,6 +8676,7 @@ async function getSingBoxCustomConfig(env, proxySettings, hostName, client, isFr
   });
   return config;
 }
+__name(getSingBoxCustomConfig, "getSingBoxCustomConfig");
 async function getNormalConfigs(proxySettings, hostName, client) {
   const {
     cleanIPs,
@@ -8568,6 +8732,7 @@ async function getNormalConfigs(proxySettings, hostName, client) {
   }
   return btoa(vlessConfs + trojanConfs + chainProxy);
 }
+__name(getNormalConfigs, "getNormalConfigs");
 var xrayConfigTemp = {
   remarks: "",
   log: {
