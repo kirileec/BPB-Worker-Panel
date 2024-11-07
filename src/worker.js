@@ -1911,7 +1911,7 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                             value="${nikaNGNoiseMode}" required>
                     </div>
                     <div class="form-control">
-                        <label for="noiseCountMin">🎚️ Noise Count</label>
+                        <label for="noiseCountMin">🎚️ 噪声数</label>
                         <div class="min-max">
                             <input type="number" id="noiseCountMin" name="noiseCountMin"
                                 value="${noiseCountMin}" min="1" required>
@@ -1921,7 +1921,7 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                         </div>
                     </div>
                     <div class="form-control">
-                        <label for="noiseSizeMin">📏 Noise Size</label>
+                        <label for="noiseSizeMin">📏 噪声大小</label>
                         <div class="min-max">
                             <input type="number" id="noiseSizeMin" name="noiseSizeMin"
                                 value="${noiseSizeMin}" min="1" required>
@@ -1931,7 +1931,7 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                         </div>
                     </div>
                     <div class="form-control">
-                        <label for="noiseDelayMin">🕞 Noise Delay</label>
+                        <label for="noiseDelayMin">🕞 噪声延迟</label>
                         <div class="min-max">
                             <input type="number" id="noiseDelayMin" name="noiseDelayMin"
                                 value="${noiseDelayMin}" min="1" required>
@@ -2062,7 +2062,7 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
                     </tr>
                 </table>
             </div>
-            <h2>FULL NORMAL SUB 🔗</h2>
+            <h2>一般全订阅 🔗</h2>
             <div class="table-container">
                 <table id="full-normal-configs-table">
                     <tr>
@@ -2380,7 +2380,7 @@ function renderHomePage (proxySettings, hostName, isPassSet) {
             <hr>
             <div class="footer">
                 <i class="fa fa-github" style="font-size:36px; margin-right: 10px;"></i>
-                <a class="link" href="https://github.com/bia-pain-bache/BPB-Worker-Panel" style="color: var(--color); text-decoration: underline;" target="_blank">Github</a>
+                <a class="link" href="https://github.com/kirileec/BPB-Worker-Panel" style="color: var(--color); text-decoration: underline;" target="_blank">Github</a>
                 <button id="openModalBtn" class="button">修改密码</button>
                 <button type="button" id="logout" style="background: none; color: var(--color); margin: 0; border: none; cursor: pointer;">
                     <i class="fa fa-power-off fa-2x" aria-hidden="true"></i>
@@ -2920,7 +2920,7 @@ function renderLoginPage () {
     </head>
     <body>
         <div class="container">
-            <h1>BPB Panel <span style="font-size: smaller;">${panelVersion}</span> 💦</h1>
+            <h1>BPB 面板 <span style="font-size: smaller;">${panelVersion}</span> 💦</h1>
             <div class="form-container">
                 <h2>User Login</h2>
                 <form id="loginForm">
@@ -4168,7 +4168,7 @@ async function getClashNormalConfig (env, proxySettings, hostName) {
         try {
             chainProxy = buildClashChainOutbound(proxyParams);
         } catch (error) {
-            console.log('An error occured while parsing chain proxy: ', error);
+            console.log('解析链式代理出错: ', error);
             chainProxy = undefined;
             await env.bpb.put("proxySettings", JSON.stringify({
                 ...proxySettings, 
@@ -4810,7 +4810,7 @@ async function getSingBoxCustomConfig(env, proxySettings, hostName, client, isFr
         try {
             chainProxyOutbound = buildSingBoxChainOutbound(proxyParams);
         } catch (error) {
-            console.log('An error occured while parsing chain proxy: ', error);
+            console.log('解析链式代理出错: ', error);
             chainProxyOutbound = undefined;
             await env.bpb.put("proxySettings", JSON.stringify({
                 ...proxySettings, 
